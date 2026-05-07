@@ -1,0 +1,45 @@
+{
+  "version": "test",
+  "frameworks": ["SASB Standards"],
+  "dependencies": [
+    {
+      "id": "HC-001",
+      "capital_type": "human",
+      "category": "Health & Safety",
+      "subcategory": "Employee Health & Safety",
+      "label": "Employee Health & Safety",
+      "description": "Dependency on maintaining workforce safety.",
+      "tnfd_ecosystem_service": null,
+      "tnfd_pillar": null,
+      "capital_protocol_category": "Human Capital",
+      "sasb_disclosure_topic": "Employee Health & Safety",
+      "sasb_industry_materiality": {
+        "EM-EP": "high",
+        "EM-MM": "high",
+        "FN-CB": "low",
+        "IF-WU": "high",
+        "FB-AG": "high"
+      },
+      "indicators": ["Total recordable incident rate (TRIR)"]
+    },
+    {
+      "id": "HC-003",
+      "capital_type": "human",
+      "category": "Diversity, Equity & Inclusion",
+      "subcategory": "Workforce Diversity",
+      "label": "Workforce Diversity & Representation",
+      "description": "Dependency on a diverse workforce.",
+      "tnfd_ecosystem_service": null,
+      "tnfd_pillar": null,
+      "capital_protocol_category": "Human Capital",
+      "sasb_disclosure_topic": "Employee Engagement, Diversity & Inclusion",
+      "sasb_industry_materiality": {
+        "FN-CB": "high",
+        "EM-EP": "medium",
+        "IF-WU": "medium",
+        "FB-AG": "medium"
+      },
+      "indicators": ["% women in workforce"]
+    }
+  ]
+}

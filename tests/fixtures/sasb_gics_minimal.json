@@ -1,0 +1,51 @@
+{
+  "version": "test",
+  "source": "test fixtures",
+  "mappings": [
+    {
+      "gics_sector": "Energy",
+      "gics_industry": "Oil, Gas & Consumable Fuels",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Oil & Gas – Exploration & Production",
+      "sasb_industry_code": "EM-EP",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Metals & Mining",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Metals & Mining",
+      "sasb_industry_code": "EM-MM",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Banks",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Commercial Banks",
+      "sasb_industry_code": "FN-CB",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Utilities",
+      "gics_industry": "Water Utilities",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Water Utilities & Services",
+      "sasb_industry_code": "IF-WU",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Food Products",
+      "sasb_sector": "Food & Beverage",
+      "sasb_industry": "Agricultural Products",
+      "sasb_industry_code": "FB-AG",
+      "confidence": "high",
+      "notes": ""
+    }
+  ]
+}

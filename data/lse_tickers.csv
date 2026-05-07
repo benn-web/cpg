@@ -1,0 +1,266 @@
+ticker,name,sector,index
+AAF.L,Airtel Africa,Communication Services,FTSE 100
+AAL.L,Anglo American,Materials,FTSE 100
+ABF.L,Associated British Foods,Consumer Staples,FTSE 100
+ADM.L,Admiral Group,Financials,FTSE 100
+AHT.L,Ashtead Group,Industrials,FTSE 100
+ANTO.L,Antofagasta,Materials,FTSE 100
+AUTO.L,Auto Trader Group,Communication Services,FTSE 100
+AV.L,Aviva,Financials,FTSE 100
+AZN.L,AstraZeneca,Health Care,FTSE 100
+BA.L,BAE Systems,Industrials,FTSE 100
+BARC.L,Barclays,Financials,FTSE 100
+BATS.L,British American Tobacco,Consumer Staples,FTSE 100
+BDEV.L,Barratt Developments,Real Estate,FTSE 100
+BEZ.L,Beazley,Financials,FTSE 100
+BKG.L,Berkeley Group,Real Estate,FTSE 100
+BLND.L,British Land,Real Estate,FTSE 100
+BP.L,BP,Energy,FTSE 100
+BRBY.L,Burberry Group,Consumer Discretionary,FTSE 100
+BT.L,BT Group,Communication Services,FTSE 100
+CCH.L,Coca-Cola HBC,Consumer Staples,FTSE 100
+CNA.L,Centrica,Utilities,FTSE 100
+CPG.L,Compass Group,Consumer Discretionary,FTSE 100
+CRDA.L,Croda International,Materials,FTSE 100
+DCC.L,DCC,Industrials,FTSE 100
+DGE.L,Diageo,Consumer Staples,FTSE 100
+DPH.L,Dechra Pharmaceuticals,Health Care,FTSE 100
+ENT.L,Entain,Consumer Discretionary,FTSE 100
+EXPN.L,Experian,Industrials,FTSE 100
+EZJ.L,easyJet,Industrials,FTSE 100
+FCIT.L,F&C Investment Trust,Financials,FTSE 100
+FRES.L,Fresnillo,Materials,FTSE 100
+GLEN.L,Glencore,Materials,FTSE 100
+GSK.L,GSK,Health Care,FTSE 100
+HIK.L,Hikma Pharmaceuticals,Health Care,FTSE 100
+HL.L,Hargreaves Lansdown,Financials,FTSE 100
+HSBA.L,HSBC Holdings,Financials,FTSE 100
+IAG.L,International Consolidated Airlines Group,Industrials,FTSE 100
+IHG.L,InterContinental Hotels Group,Consumer Discretionary,FTSE 100
+III.L,3i Group,Financials,FTSE 100
+IMB.L,Imperial Brands,Consumer Staples,FTSE 100
+INF.L,Informa,Communication Services,FTSE 100
+ITRK.L,Intertek Group,Industrials,FTSE 100
+JD.L,JD Sports Fashion,Consumer Discretionary,FTSE 100
+KGF.L,Kingfisher,Consumer Discretionary,FTSE 100
+LAND.L,Land Securities Group,Real Estate,FTSE 100
+LGEN.L,Legal & General Group,Financials,FTSE 100
+LLOY.L,Lloyds Banking Group,Financials,FTSE 100
+LSEG.L,London Stock Exchange Group,Financials,FTSE 100
+MKS.L,Marks & Spencer Group,Consumer Discretionary,FTSE 100
+MNDI.L,Mondi,Materials,FTSE 100
+MNG.L,M&G,Financials,FTSE 100
+MRO.L,Melrose Industries,Industrials,FTSE 100
+NG.L,National Grid,Utilities,FTSE 100
+NWG.L,NatWest Group,Financials,FTSE 100
+NXT.L,Next,Consumer Discretionary,FTSE 100
+OCDO.L,Ocado Group,Consumer Staples,FTSE 100
+PHNX.L,Phoenix Group Holdings,Financials,FTSE 100
+PRU.L,Prudential,Financials,FTSE 100
+PSN.L,Persimmon,Real Estate,FTSE 100
+PSON.L,Pearson,Communication Services,FTSE 100
+REL.L,RELX,Industrials,FTSE 100
+RIO.L,Rio Tinto,Materials,FTSE 100
+RKT.L,Reckitt Benckiser Group,Consumer Staples,FTSE 100
+RMV.L,Rightmove,Communication Services,FTSE 100
+RR.L,Rolls-Royce Holdings,Industrials,FTSE 100
+RS1.L,RS Group,Industrials,FTSE 100
+SBRY.L,J Sainsbury,Consumer Staples,FTSE 100
+SGE.L,Sage Group,Information Technology,FTSE 100
+SHEL.L,Shell,Energy,FTSE 100
+SKG.L,Smurfit Kappa Group,Materials,FTSE 100
+SMDS.L,DS Smith,Materials,FTSE 100
+SMIN.L,Smiths Group,Industrials,FTSE 100
+SMT.L,Scottish Mortgage Investment Trust,Financials,FTSE 100
+SN.L,Smith & Nephew,Health Care,FTSE 100
+SSE.L,SSE,Utilities,FTSE 100
+STAN.L,Standard Chartered,Financials,FTSE 100
+SVT.L,Severn Trent,Utilities,FTSE 100
+TSCO.L,Tesco,Consumer Staples,FTSE 100
+TW.L,Taylor Wimpey,Real Estate,FTSE 100
+ULVR.L,Unilever,Consumer Staples,FTSE 100
+UU.L,United Utilities Group,Utilities,FTSE 100
+VOD.L,Vodafone Group,Communication Services,FTSE 100
+WEIR.L,Weir Group,Industrials,FTSE 100
+WPP.L,WPP,Communication Services,FTSE 100
+WTB.L,Whitbread,Consumer Discretionary,FTSE 100
+AEP.L,Anglo Eastern Plantations,Materials,FTSE 250
+AGR.L,Assura,Real Estate,FTSE 250
+AJB.L,AJ Bell,Financials,FTSE 250
+ANTO.L,Antofagasta,Materials,FTSE 100
+ASC.L,ASOS,Consumer Discretionary,FTSE 250
+ATG.L,Auction Technology Group,Information Technology,FTSE 250
+AWE.L,Alphawave IP Group,Information Technology,FTSE 250
+BBY.L,Balfour Beatty,Industrials,FTSE 250
+BBOX.L,Tritax Big Box REIT,Real Estate,FTSE 250
+BME.L,B&M European Value Retail,Consumer Discretionary,FTSE 250
+BNC.L,Banco Santander UK,Financials,FTSE 250
+BOY.L,Bodycote,Industrials,FTSE 250
+BRW.L,Brewin Dolphin Holdings,Financials,FTSE 250
+CARD.L,Card Factory,Consumer Discretionary,FTSE 250
+CBG.L,Close Brothers Group,Financials,FTSE 250
+CLDN.L,Caledonia Investments,Financials,FTSE 250
+CHG.L,Chesnara,Financials,FTSE 250
+CKN.L,Cookson Group,Industrials,FTSE 250
+CLG.L,Clipper Logistics,Industrials,FTSE 250
+CMC.L,CMC Markets,Financials,FTSE 250
+CNE.L,Capricorn Energy,Energy,FTSE 250
+CSP.L,Countryside Partnerships,Real Estate,FTSE 250
+CTEC.L,ConvaTec Group,Health Care,FTSE 250
+CVS.L,CVS Group,Consumer Discretionary,FTSE 250
+DPLM.L,Diploma,Industrials,FTSE 250
+DSG.L,Devro,Consumer Staples,FTSE 250
+DWTS.L,Dart Group,Industrials,FTSE 250
+EMG.L,Man Group,Financials,FTSE 250
+ESNT.L,Essentra,Industrials,FTSE 250
+FLIX.L,Watches of Switzerland,Consumer Discretionary,FTSE 250
+FLTR.L,Flutter Entertainment,Consumer Discretionary,FTSE 250
+FNV.L,Franco-Nevada,Materials,FTSE 250
+FOUR.L,4imprint Group,Communication Services,FTSE 250
+FSV.L,Focusrite,Information Technology,FTSE 250
+FUTR.L,Future,Communication Services,FTSE 250
+GCP.L,GCP Infrastructure Investments,Financials,FTSE 250
+GNS.L,Genus,Consumer Staples,FTSE 250
+GPE.L,Great Portland Estates,Real Estate,FTSE 250
+GRI.L,Grainger,Real Estate,FTSE 250
+HBR.L,Harbour Energy,Energy,FTSE 250
+HLN.L,Haleon,Consumer Staples,FTSE 250
+HMSO.L,Hammerson,Real Estate,FTSE 250
+HWDN.L,Howden Joinery Group,Consumer Discretionary,FTSE 250
+ICG.L,Intermediate Capital Group,Financials,FTSE 250
+IGTA.L,Ignis Asset Management,Financials,FTSE 250
+IMI.L,IMI,Industrials,FTSE 250
+IPX.L,Impax Asset Management,Financials,FTSE 250
+JMAT.L,Johnson Matthey,Materials,FTSE 250
+JMG.L,Jupiter Fund Management,Financials,FTSE 250
+JTC.L,JTC,Financials,FTSE 250
+KIE.L,Kier Group,Industrials,FTSE 250
+MONY.L,Moneysupermarket.com,Communication Services,FTSE 250
+MPI.L,Marshall Motor Holdings,Consumer Discretionary,FTSE 250
+MRW.L,WM Morrison Supermarkets,Consumer Staples,FTSE 250
+MTO.L,Mitie Group,Industrials,FTSE 250
+MXC.L,MaxCyte,Health Care,FTSE 250
+NCT.L,Norcros,Consumer Discretionary,FTSE 250
+NETW.L,Network International Holdings,Information Technology,FTSE 250
+NMC.L,NMC Health,Health Care,FTSE 250
+OML.L,Old Mutual,Financials,FTSE 250
+PAG.L,Patria Investments,Financials,FTSE 250
+PETS.L,Pets at Home Group,Consumer Discretionary,FTSE 250
+PHC.L,Pharmos Corporation,Health Care,FTSE 250
+PNN.L,Pennon Group,Utilities,FTSE 250
+PTY.L,Pottery Barn,Consumer Discretionary,FTSE 250
+QQ.L,Quilter,Financials,FTSE 250
+RCO.L,Renewi,Industrials,FTSE 250
+RHIM.L,RHI Magnesita,Materials,FTSE 250
+RTO.L,Rentokil Initial,Industrials,FTSE 250
+SDR.L,Schroders,Financials,FTSE 250
+SHI.L,SThree,Industrials,FTSE 250
+SHPT.L,Shaftesbury,Real Estate,FTSE 250
+SMWH.L,WH Smith,Consumer Discretionary,FTSE 250
+SPX.L,Spirax-Sarco Engineering,Industrials,FTSE 250
+SQZ.L,Seraphim Space Investment Trust,Information Technology,FTSE 250
+SRP.L,Serco Group,Industrials,FTSE 250
+STJ.L,St. James's Place,Financials,FTSE 250
+SXS.L,Spectris,Industrials,FTSE 250
+TCAP.L,Ten Entertainment Group,Consumer Discretionary,FTSE 250
+TBCG.L,TBC Bank Group,Financials,FTSE 250
+TED.L,Ted Baker,Consumer Discretionary,FTSE 250
+TGNA.L,Telent,Industrials,FTSE 250
+TIFS.L,TI Fluid Systems,Consumer Discretionary,FTSE 250
+TRIG.L,The Renewables Infrastructure Group,Utilities,FTSE 250
+TRN.L,Trainline,Industrials,FTSE 250
+TTG.L,TUI Group,Consumer Discretionary,FTSE 250
+TUI.L,TUI Travel,Consumer Discretionary,FTSE 250
+UBM.L,UBM,Communication Services,FTSE 250
+ULVR.L,Unilever,Consumer Staples,FTSE 100
+VCT.L,Victrex,Materials,FTSE 250
+VLE.L,Valero Energy,Energy,FTSE 250
+VME.L,Vmed O2 UK,Communication Services,FTSE 250
+VTY.L,Vistry Group,Real Estate,FTSE 250
+WAND.L,Wandisco,Information Technology,FTSE 250
+WIZZ.L,Wizz Air Holdings,Industrials,FTSE 250
+WKS.L,The Works,Consumer Discretionary,FTSE 250
+WPS.L,Wood Group (John),Energy,FTSE 250
+XPS.L,XPS Pensions Group,Financials,FTSE 250
+YNGA.L,Young & Co's Brewery,Consumer Discretionary,FTSE 250
+ZPG.L,Zoopla Property Group,Real Estate,FTSE 250
+AFC.L,AFC Energy,Utilities,AIM
+AGM.L,Agronomics,Materials,AIM
+ALPH.L,Alpha FX Group,Financials,AIM
+AMO.L,Amigo Holdings,Financials,AIM
+AQSE.L,Aquis Exchange,Financials,AIM
+BBOX.L,Tritax Big Box REIT,Real Estate,FTSE 250
+BOO.L,boohoo Group,Consumer Discretionary,AIM
+BRK.L,Brooks Macdonald Group,Financials,AIM
+CERES.L,Ceres Power Holdings,Industrials,AIM
+CWR.L,Ceres Power Holdings,Industrials,AIM
+DORE.L,Downing Renewables & Infrastructure Trust,Utilities,AIM
+EKF.L,EKF Diagnostics Holdings,Health Care,AIM
+EMH.L,European Metals Holdings,Materials,AIM
+ENVG.L,Environment Group,Industrials,AIM
+ESGO.L,ESG Enterprise,Industrials,AIM
+EVR.L,EVR Holdings,Communication Services,AIM
+FIPP.L,Frontier IP Group,Financials,AIM
+FXRT.L,Foxtons Group,Real Estate,AIM
+GOOD.L,Good Energy Group,Utilities,AIM
+GRC.L,Global Resources Investment Trust,Materials,AIM
+GRP.L,Greencoat UK Wind,Utilities,FTSE 250
+GSF.L,Gore Street Energy Storage Fund,Utilities,AIM
+HICL.L,HICL Infrastructure,Industrials,FTSE 250
+HTWS.L,Helios Towers,Communication Services,FTSE 250
+HVPE.L,HarbourVest Global Private Equity,Financials,FTSE 250
+HVO.L,Hive Energy,Utilities,AIM
+IDP.L,Indivior,Health Care,FTSE 250
+ITM.L,ITM Power,Industrials,AIM
+JLEN.L,John Laing Environmental Assets,Utilities,FTSE 250
+KGYM.L,Kingdom Gym Holdings,Consumer Discretionary,AIM
+LIQT.L,LiqTech International,Industrials,AIM
+MATE.L,Mater Private Group,Health Care,AIM
+MEG.L,Megalink,Information Technology,AIM
+MHN.L,Mosman Oil and Gas,Energy,AIM
+MLVN.L,Malvern International,Industrials,AIM
+MMH.L,Marshall Motor Holdings,Consumer Discretionary,AIM
+MNTG.L,Montanaro UK Smaller Companies Trust,Financials,AIM
+MPAC.L,Mpac Group,Industrials,AIM
+MTC.L,Mothercare,Consumer Discretionary,AIM
+NETL.L,Netherlands Trust,Financials,AIM
+NESF.L,NextEnergy Solar Fund,Utilities,FTSE 250
+NFG.L,Newbury Pharmaceuticals,Health Care,AIM
+NRR.L,NewRiver REIT,Real Estate,FTSE 250
+NTOG.L,Nighthawk Energy,Energy,AIM
+ONT.L,Oxford Nanopore Technologies,Health Care,FTSE 250
+OPTI.L,Optibiotix Health,Health Care,AIM
+ORIT.L,Octopus Renewables Infrastructure Trust,Utilities,AIM
+PAY.L,Equals Group,Financials,AIM
+PCA.L,Palace Capital,Real Estate,AIM
+PCIP.L,PCI-PAL,Information Technology,AIM
+PHI.L,Pacific Horizon Investment Trust,Financials,AIM
+PXEN.L,Proxima Energy,Energy,AIM
+RBG.L,RBG Holdings,Financials,AIM
+RCH.L,Reach,Communication Services,FTSE 250
+RENX.L,Renewi,Industrials,FTSE 250
+RNW.L,Renew Holdings,Industrials,AIM
+ROR.L,Rotork,Industrials,FTSE 250
+SCE.L,Surface Transforms,Industrials,AIM
+SGRO.L,Segro,Real Estate,FTSE 100
+SHB.L,Shaftesbury Capital,Real Estate,FTSE 100
+SLP.L,Sylvania Platinum,Materials,AIM
+SNWS.L,Sinswells,Industrials,AIM
+SQZ.L,Seraphim Space Investment Trust,Information Technology,AIM
+SUPR.L,Supermarket Income REIT,Real Estate,FTSE 250
+TET.L,Treatt,Materials,AIM
+TPFG.L,The Property Franchise Group,Real Estate,AIM
+TRIG.L,The Renewables Infrastructure Group,Utilities,FTSE 250
+TRK.L,Torc,Energy,AIM
+TRSG.L,Tortoise Acquisition Corp,Financials,AIM
+UKW.L,Greencoat UK Wind,Utilities,FTSE 250
+UKCM.L,UK Commercial Property REIT,Real Estate,FTSE 250
+VLS.L,Velocys,Energy,AIM
+VMUK.L,Virgin Money UK,Financials,FTSE 250
+VSL.L,VPC Specialty Lending Investments,Financials,AIM
+WAG.L,Warpaint London,Consumer Staples,AIM
+WCAT.L,Wildcat Petroleum,Energy,AIM
+WTE.L,Watkin Jones,Real Estate,AIM
+XAAR.L,Xaar,Industrials,AIM
+ZEBR.L,Zebra Technologies UK,Information Technology,AIM
+ZENB.L,Zen Educate,Industrials,AIM

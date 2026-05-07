@@ -1,0 +1,43 @@
+{
+  "version": "test",
+  "frameworks": ["SASB Standards"],
+  "dependencies": [
+    {
+      "id": "SC-001",
+      "capital_type": "social",
+      "category": "Community Relations",
+      "subcategory": "Social License to Operate",
+      "label": "Community Relations & Social License",
+      "description": "Dependency on maintaining community trust.",
+      "tnfd_ecosystem_service": null,
+      "tnfd_pillar": null,
+      "capital_protocol_category": "Social Capital",
+      "sasb_disclosure_topic": "Community Relations",
+      "sasb_industry_materiality": {
+        "EM-EP": "high",
+        "EM-MM": "high",
+        "FN-CB": "low",
+        "IF-WU": "high"
+      },
+      "indicators": ["Number of community complaints"]
+    },
+    {
+      "id": "SC-003",
+      "capital_type": "social",
+      "category": "Customer",
+      "subcategory": "Customer Privacy & Data Security",
+      "label": "Customer Data Privacy & Cybersecurity",
+      "description": "Dependency on customer trust through secure data handling.",
+      "tnfd_ecosystem_service": null,
+      "tnfd_pillar": null,
+      "capital_protocol_category": "Social Capital",
+      "sasb_disclosure_topic": "Customer Privacy",
+      "sasb_industry_materiality": {
+        "FN-CB": "high",
+        "EM-EP": "low",
+        "IF-WU": "medium"
+      },
+      "indicators": ["Number of material data breaches"]
+    }
+  ]
+}

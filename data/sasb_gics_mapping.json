@@ -1,0 +1,592 @@
+{
+  "version": "2024-01",
+  "source": "SASB Standards 2023 + MSCI GICS 2023",
+  "notes": "A GICS industry may map to multiple SASB codes at different confidence levels. The dependency engine picks the highest-confidence entry; ties are resolved by merging materiality maps using max().",
+  "mappings": [
+    {
+      "gics_sector": "Energy",
+      "gics_industry": "Oil, Gas & Consumable Fuels",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Oil & Gas – Exploration & Production",
+      "sasb_industry_code": "EM-EP",
+      "confidence": "high",
+      "notes": "Primary mapping for integrated & upstream operators (BP, Shell)"
+    },
+    {
+      "gics_sector": "Energy",
+      "gics_industry": "Oil, Gas & Consumable Fuels",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Oil & Gas – Refining & Marketing",
+      "sasb_industry_code": "EM-RM",
+      "confidence": "medium",
+      "notes": "Secondary mapping for downstream-heavy operators"
+    },
+    {
+      "gics_sector": "Energy",
+      "gics_industry": "Energy Equipment & Services",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Oil & Gas – Services",
+      "sasb_industry_code": "EM-SV",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Metals & Mining",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Metals & Mining",
+      "sasb_industry_code": "EM-MM",
+      "confidence": "high",
+      "notes": "Rio Tinto, Anglo American, Antofagasta, Glencore"
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Steel",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Iron & Steel Producers",
+      "sasb_industry_code": "EM-IS",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Chemicals",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Chemicals",
+      "sasb_industry_code": "RT-CH",
+      "confidence": "high",
+      "notes": "Croda International, Johnson Matthey"
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Specialty Chemicals",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Chemicals",
+      "sasb_industry_code": "RT-CH",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Containers & Packaging",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Containers & Packaging",
+      "sasb_industry_code": "RT-CP",
+      "confidence": "high",
+      "notes": "DS Smith, Smurfit Kappa"
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Paper & Forest Products",
+      "sasb_sector": "Renewable Resources & Alternative Energy",
+      "sasb_industry": "Pulp & Paper Products",
+      "sasb_industry_code": "RR-PP",
+      "confidence": "high",
+      "notes": "Mondi"
+    },
+    {
+      "gics_sector": "Materials",
+      "gics_industry": "Construction Materials",
+      "sasb_sector": "Extractives & Minerals Processing",
+      "sasb_industry": "Construction Materials",
+      "sasb_industry_code": "EM-CO",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Aerospace & Defense",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Aerospace & Defense",
+      "sasb_industry_code": "RT-AE",
+      "confidence": "high",
+      "notes": "BAE Systems, Rolls-Royce"
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Industrial Machinery",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Industrial Machinery & Goods",
+      "sasb_industry_code": "RT-IG",
+      "confidence": "high",
+      "notes": "Weir Group, Spirax-Sarco"
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Machinery",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Industrial Machinery & Goods",
+      "sasb_industry_code": "RT-IG",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Industrial Conglomerates",
+      "sasb_sector": "Resource Transformation",
+      "sasb_industry": "Industrial Machinery & Goods",
+      "sasb_industry_code": "RT-IG",
+      "confidence": "medium",
+      "notes": "Broad fallback for conglomerates"
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Construction & Engineering",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Engineering & Construction Services",
+      "sasb_industry_code": "IF-EN",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Building Products",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Building Products & Furnishings",
+      "sasb_industry_code": "CG-BF",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Commercial Services & Supplies",
+      "sasb_sector": "Services",
+      "sasb_industry": "Professional & Commercial Services",
+      "sasb_industry_code": "SV-PS",
+      "confidence": "medium",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Professional Services",
+      "sasb_sector": "Services",
+      "sasb_industry": "Professional & Commercial Services",
+      "sasb_industry_code": "SV-PS",
+      "confidence": "high",
+      "notes": "Intertek, Experian"
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Air Freight & Logistics",
+      "sasb_sector": "Transportation",
+      "sasb_industry": "Air Freight & Logistics",
+      "sasb_industry_code": "TR-AF",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Marine Transportation",
+      "sasb_sector": "Transportation",
+      "sasb_industry": "Marine Transportation",
+      "sasb_industry_code": "TR-MT",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Industrials",
+      "gics_industry": "Road & Rail",
+      "sasb_sector": "Transportation",
+      "sasb_industry": "Rail Transportation",
+      "sasb_industry_code": "TR-RA",
+      "confidence": "medium",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Auto Components",
+      "sasb_sector": "Transportation",
+      "sasb_industry": "Auto Parts",
+      "sasb_industry_code": "TR-AP",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Automobiles",
+      "sasb_sector": "Transportation",
+      "sasb_industry": "Automobiles",
+      "sasb_industry_code": "TR-AU",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Specialty Retail",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Multiline and Specialty Retailers & Distributors",
+      "sasb_industry_code": "CG-MR",
+      "confidence": "high",
+      "notes": "Next, JD Sports"
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Multiline Retail",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Multiline and Specialty Retailers & Distributors",
+      "sasb_industry_code": "CG-MR",
+      "confidence": "high",
+      "notes": "Marks & Spencer"
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Textiles, Apparel & Luxury Goods",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Apparel, Accessories & Footwear",
+      "sasb_industry_code": "CG-AA",
+      "confidence": "high",
+      "notes": "Burberry"
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Hotels, Restaurants & Leisure",
+      "sasb_sector": "Services",
+      "sasb_industry": "Hotels & Lodging",
+      "sasb_industry_code": "SV-HL",
+      "confidence": "medium",
+      "notes": "IHG, Whitbread — restaurants use FB-RN"
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Household Durables",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Building Products & Furnishings",
+      "sasb_industry_code": "CG-BF",
+      "confidence": "medium",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Consumer Discretionary",
+      "gics_industry": "Internet & Direct Marketing Retail",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Multiline and Specialty Retailers & Distributors",
+      "sasb_industry_code": "CG-MR",
+      "confidence": "medium",
+      "notes": "Ocado"
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Food Products",
+      "sasb_sector": "Food & Beverage",
+      "sasb_industry": "Agricultural Products",
+      "sasb_industry_code": "FB-AG",
+      "confidence": "high",
+      "notes": "Associated British Foods (food division)"
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Beverages",
+      "sasb_sector": "Food & Beverage",
+      "sasb_industry": "Alcoholic Beverages",
+      "sasb_industry_code": "FB-BV",
+      "confidence": "medium",
+      "notes": "Diageo (alcoholic) — non-alcoholic uses FB-NB"
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Tobacco",
+      "sasb_sector": "Food & Beverage",
+      "sasb_industry": "Tobacco",
+      "sasb_industry_code": "FB-TB",
+      "confidence": "high",
+      "notes": "British American Tobacco, Imperial Brands"
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Household Products",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Household & Personal Products",
+      "sasb_industry_code": "CG-HP",
+      "confidence": "high",
+      "notes": "Reckitt, Unilever (HPC)"
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Personal Products",
+      "sasb_sector": "Consumer Goods",
+      "sasb_industry": "Household & Personal Products",
+      "sasb_industry_code": "CG-HP",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Consumer Staples",
+      "gics_industry": "Food & Staples Retailing",
+      "sasb_sector": "Food & Beverage",
+      "sasb_industry": "Food Retailers & Distributors",
+      "sasb_industry_code": "FB-FR",
+      "confidence": "high",
+      "notes": "Tesco, Sainsbury's"
+    },
+    {
+      "gics_sector": "Health Care",
+      "gics_industry": "Pharmaceuticals",
+      "sasb_sector": "Health Care",
+      "sasb_industry": "Biotechnology & Pharmaceuticals",
+      "sasb_industry_code": "HC-BP",
+      "confidence": "high",
+      "notes": "AstraZeneca, GSK"
+    },
+    {
+      "gics_sector": "Health Care",
+      "gics_industry": "Biotechnology",
+      "sasb_sector": "Health Care",
+      "sasb_industry": "Biotechnology & Pharmaceuticals",
+      "sasb_industry_code": "HC-BP",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Health Care",
+      "gics_industry": "Health Care Equipment & Supplies",
+      "sasb_sector": "Health Care",
+      "sasb_industry": "Medical Equipment & Supplies",
+      "sasb_industry_code": "HC-MS",
+      "confidence": "high",
+      "notes": "Smith & Nephew, Hikma"
+    },
+    {
+      "gics_sector": "Health Care",
+      "gics_industry": "Health Care Providers & Services",
+      "sasb_sector": "Health Care",
+      "sasb_industry": "Health Care Delivery",
+      "sasb_industry_code": "HC-DY",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Banks",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Commercial Banks",
+      "sasb_industry_code": "FN-CB",
+      "confidence": "high",
+      "notes": "HSBC, Lloyds, Barclays, NatWest, Standard Chartered"
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Diversified Banks",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Commercial Banks",
+      "sasb_industry_code": "FN-CB",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Insurance",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Insurance",
+      "sasb_industry_code": "FN-IN",
+      "confidence": "high",
+      "notes": "Aviva, Legal & General, Prudential, Phoenix, Admiral, Beazley"
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Life & Health Insurance",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Insurance",
+      "sasb_industry_code": "FN-IN",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Property & Casualty Insurance",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Insurance",
+      "sasb_industry_code": "FN-IN",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Capital Markets",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Investment Banking & Brokerage",
+      "sasb_industry_code": "FN-IB",
+      "confidence": "high",
+      "notes": "London Stock Exchange Group, 3i Group, Hargreaves Lansdown"
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Asset Management & Custody Banks",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Asset Management & Custody Activities",
+      "sasb_industry_code": "FN-AC",
+      "confidence": "high",
+      "notes": "M&G, Scottish Mortgage (investment trusts)"
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Consumer Finance",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Consumer Finance",
+      "sasb_industry_code": "FN-CF",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Financials",
+      "gics_industry": "Diversified Financial Services",
+      "sasb_sector": "Financials",
+      "sasb_industry": "Investment Banking & Brokerage",
+      "sasb_industry_code": "FN-IB",
+      "confidence": "medium",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Information Technology",
+      "gics_industry": "Software",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Software & IT Services",
+      "sasb_industry_code": "TC-SI",
+      "confidence": "high",
+      "notes": "Sage Group"
+    },
+    {
+      "gics_sector": "Information Technology",
+      "gics_industry": "IT Services",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Software & IT Services",
+      "sasb_industry_code": "TC-SI",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Information Technology",
+      "gics_industry": "Technology Hardware, Storage & Peripherals",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Hardware",
+      "sasb_industry_code": "TC-HW",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Information Technology",
+      "gics_industry": "Electronic Equipment, Instruments & Components",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Electronic Manufacturing Services & Original Design Manufacturing",
+      "sasb_industry_code": "TC-EM",
+      "confidence": "medium",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Communication Services",
+      "gics_industry": "Diversified Telecommunication Services",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Telecommunication Services",
+      "sasb_industry_code": "TC-TL",
+      "confidence": "high",
+      "notes": "Vodafone, BT"
+    },
+    {
+      "gics_sector": "Communication Services",
+      "gics_industry": "Wireless Telecommunication Services",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Telecommunication Services",
+      "sasb_industry_code": "TC-TL",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Communication Services",
+      "gics_industry": "Media",
+      "sasb_sector": "Services",
+      "sasb_industry": "Media & Entertainment",
+      "sasb_industry_code": "SV-ME",
+      "confidence": "high",
+      "notes": "WPP, Informa, Pearson, RELX"
+    },
+    {
+      "gics_sector": "Communication Services",
+      "gics_industry": "Interactive Media & Services",
+      "sasb_sector": "Technology & Communications",
+      "sasb_industry": "Internet Media & Services",
+      "sasb_industry_code": "TC-IM",
+      "confidence": "high",
+      "notes": "Auto Trader, Rightmove"
+    },
+    {
+      "gics_sector": "Utilities",
+      "gics_industry": "Electric Utilities",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Electric Utilities & Power Generators",
+      "sasb_industry_code": "IF-EU",
+      "confidence": "high",
+      "notes": "SSE, National Grid"
+    },
+    {
+      "gics_sector": "Utilities",
+      "gics_industry": "Multi-Utilities",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Electric Utilities & Power Generators",
+      "sasb_industry_code": "IF-EU",
+      "confidence": "medium",
+      "notes": "National Grid, Centrica"
+    },
+    {
+      "gics_sector": "Utilities",
+      "gics_industry": "Gas Utilities",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Gas Utilities & Distributors",
+      "sasb_industry_code": "IF-GU",
+      "confidence": "high",
+      "notes": "Centrica, Cadent"
+    },
+    {
+      "gics_sector": "Utilities",
+      "gics_industry": "Water Utilities",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Water Utilities & Services",
+      "sasb_industry_code": "IF-WU",
+      "confidence": "high",
+      "notes": "Severn Trent, United Utilities, Pennon"
+    },
+    {
+      "gics_sector": "Real Estate",
+      "gics_industry": "Diversified REITs",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Real Estate",
+      "sasb_industry_code": "IF-RE",
+      "confidence": "high",
+      "notes": "British Land, Land Securities"
+    },
+    {
+      "gics_sector": "Real Estate",
+      "gics_industry": "Retail REITs",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Real Estate",
+      "sasb_industry_code": "IF-RE",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Real Estate",
+      "gics_industry": "Office REITs",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Real Estate",
+      "sasb_industry_code": "IF-RE",
+      "confidence": "high",
+      "notes": ""
+    },
+    {
+      "gics_sector": "Real Estate",
+      "gics_industry": "Real Estate Management & Development",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Home Builders",
+      "sasb_industry_code": "IF-HB",
+      "confidence": "medium",
+      "notes": "Barratt, Persimmon, Taylor Wimpey, Berkeley"
+    },
+    {
+      "gics_sector": "Real Estate",
+      "gics_industry": "Residential REITs",
+      "sasb_sector": "Infrastructure",
+      "sasb_industry": "Real Estate",
+      "sasb_industry_code": "IF-RE",
+      "confidence": "high",
+      "notes": ""
+    }
+  ]
+}

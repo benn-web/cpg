@@ -1,0 +1,65 @@
+{
+  "version": "test",
+  "frameworks": ["TNFD v1.0"],
+  "dependencies": [
+    {
+      "id": "NC-001",
+      "capital_type": "natural",
+      "category": "Water",
+      "subcategory": "Water Quantity",
+      "label": "Water Withdrawal & Consumption",
+      "description": "Operational reliance on freshwater supplies.",
+      "tnfd_ecosystem_service": "Provisioning – Freshwater",
+      "tnfd_pillar": "Dependencies",
+      "capital_protocol_category": "Natural Capital",
+      "sasb_disclosure_topic": "Water Management",
+      "sasb_industry_materiality": {
+        "EM-EP": "high",
+        "EM-MM": "high",
+        "FB-AG": "high",
+        "FN-CB": "low",
+        "IF-WU": "high"
+      },
+      "indicators": ["Total water withdrawn (m³/year)"]
+    },
+    {
+      "id": "NC-003",
+      "capital_type": "natural",
+      "category": "Air",
+      "subcategory": "GHG Emissions",
+      "label": "Greenhouse Gas Emissions",
+      "description": "Dependency on the atmosphere as a carbon sink.",
+      "tnfd_ecosystem_service": "Regulating – Climate Regulation",
+      "tnfd_pillar": "Impacts",
+      "capital_protocol_category": "Natural Capital",
+      "sasb_disclosure_topic": "GHG Emissions",
+      "sasb_industry_materiality": {
+        "EM-EP": "high",
+        "EM-MM": "high",
+        "FN-CB": "medium",
+        "IF-WU": "medium",
+        "FB-AG": "high"
+      },
+      "indicators": ["Scope 1 GHG emissions (tCO₂e)"]
+    },
+    {
+      "id": "NC-007",
+      "capital_type": "natural",
+      "category": "Biodiversity",
+      "subcategory": "Ecosystem Integrity",
+      "label": "Biodiversity & Habitat",
+      "description": "Reliance on healthy ecosystems for operational support.",
+      "tnfd_ecosystem_service": "Regulating – Pollination",
+      "tnfd_pillar": "Dependencies",
+      "capital_protocol_category": "Natural Capital",
+      "sasb_disclosure_topic": "Biodiversity Impacts",
+      "sasb_industry_materiality": {
+        "EM-MM": "high",
+        "FB-AG": "high",
+        "EM-EP": "high",
+        "FN-CB": "low"
+      },
+      "indicators": ["Area of operations in protected areas (ha)"]
+    }
+  ]
+}
