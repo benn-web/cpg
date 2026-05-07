@@ -20,6 +20,17 @@ from app.ui import search as search_ui
 _APP_VERSION = "0.1.0"
 
 
+def _get_api_key() -> str:
+    """Check env var first, then Streamlit Cloud secrets."""
+    key = os.getenv("ANTHROPIC_API_KEY", "")
+    if not key:
+        try:
+            key = st.secrets.get("ANTHROPIC_API_KEY", "")
+        except Exception:
+            pass
+    return key or ""
+
+
 def _init_session_state() -> None:
     st.session_state.setdefault("company", None)
     st.session_state.setdefault("report", None)
@@ -36,7 +47,7 @@ def _render_sidebar() -> tuple[bool, str]:
         llm_default = os.getenv("LLM_ENRICHMENT_ENABLED", "false").lower() == "true"
         llm_enabled = st.toggle("Enable Claude Analysis", value=llm_default, help="Enriches rule-based results with company-specific LLM analysis using Claude.")
 
-        api_key = os.getenv("ANTHROPIC_API_KEY", "")
+        api_key = _get_api_key()
         if llm_enabled and not api_key:
             api_key = st.text_input(
                 "Anthropic API Key",
