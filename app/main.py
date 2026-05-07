@@ -1,6 +1,12 @@
 """Streamlit entry point for the Capital Dependencies Assessment Tool."""
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+# Ensure repo root is on sys.path so `from app.X` imports work on Streamlit Cloud
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import os
 from pathlib import Path
 from typing import Optional, Union
