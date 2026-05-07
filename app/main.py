@@ -41,6 +41,9 @@ def _init_session_state() -> None:
     st.session_state.setdefault("company", None)
     st.session_state.setdefault("report", None)
     st.session_state.setdefault("llm_error", None)
+    st.session_state.setdefault("stakeholder_overrides", {})
+    st.session_state.setdefault("stakeholder_name", "")
+    st.session_state.setdefault("_override_key", "")
 
 
 def _render_sidebar() -> tuple[bool, str]:
@@ -85,6 +88,9 @@ def _render_sidebar() -> tuple[bool, str]:
             st.session_state.company = None
             st.session_state.report = None
             st.session_state.llm_error = None
+            st.session_state.stakeholder_overrides = {}
+            st.session_state.stakeholder_name = ""
+            st.session_state._override_key = ""
             st.rerun()
 
     return llm_enabled, api_key

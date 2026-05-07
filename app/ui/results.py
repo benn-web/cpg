@@ -6,7 +6,8 @@ from typing import Union
 import pandas as pd
 import streamlit as st
 
-from app.export import to_json, to_csv, to_excel, flatten_report
+from app.dependency_engine import apply_stakeholder_overrides
+from app.export import to_json, to_csv, to_excel, to_iro_register_csv, flatten_report
 from app.models import (
     CapitalPanel,
     CompanyProfile,
@@ -19,6 +20,7 @@ from app.ui.theme import (
     format_market_cap, score_badge, MATERIALITY_COLOURS,
 )
 from app.ui import charts
+from app.ui import stakeholder as stakeholder_ui
 
 AnyReport = Union[DependencyReport, EnrichedReport]
 
@@ -174,12 +176,163 @@ def render_overview_tab(report: AnyReport) -> None:
                 st.divider()
 
 
+def _iro_register_dataframe(base: DependencyReport) -> pd.DataFrame:
+    """Build the IRO register table for display."""
+    rows = []
+    for panel in [base.natural_capital, base.social_capital, base.human_capital]:
+        for scored in panel.dependencies:
+            dep = scored.dependency
+            rows.append({
+                "ESRS": dep.esrs_topic or "–",
+                "Label": dep.label,
+                "Capital": panel.capital_type.value.title(),
+                "Category": dep.category,
+                "IRO Type": scored.iro_type,
+                "Financial": scored.materiality_score.value.upper(),
+                "Fin Score": scored.materiality_numeric,
+                "Impact": scored.impact_score.value.upper(),
+                "Imp Score": scored.impact_numeric,
+                "Doubly Material": "✓" if scored.doubly_material else "",
+            })
+    df = pd.DataFrame(rows)
+    if not df.empty:
+        df = df.sort_values(
+            ["Doubly Material", "Fin Score", "Imp Score"],
+            ascending=[False, False, False],
+        ).reset_index(drop=True)
+    return df
+
+
+def _style_iro_cell(val: str) -> str:
+    colour_map = {
+        "HIGH": f"background-color:{COLOUR_HIGH};color:white;font-weight:bold",
+        "MEDIUM": f"background-color:{COLOUR_MEDIUM};color:white;font-weight:bold",
+        "LOW": f"background-color:{COLOUR_LOW};color:white;font-weight:bold",
+    }
+    return colour_map.get(val, "")
+
+
+def render_double_materiality_tab(report: AnyReport) -> None:
+    """Render the Double Materiality tab: matrix, summary, IRO register, stakeholder panel."""
+    base = _get_base(report)
+
+    st.markdown(
+        "Double materiality assesses both **financial materiality** (outside-in: how "
+        "the external world affects the company) and **impact materiality** (inside-out: "
+        "how the company affects natural, social, and human capital). Required under CSRD/ESRS."
+    )
+
+    # Apply any existing stakeholder overrides from session state
+    existing_overrides = _collect_existing_overrides(base)
+    if existing_overrides:
+        base = apply_stakeholder_overrides(base, existing_overrides)
+
+    # Summary counts
+    all_scored = (
+        list(base.natural_capital.dependencies)
+        + list(base.social_capital.dependencies)
+        + list(base.human_capital.dependencies)
+    )
+    doubly = sum(1 for d in all_scored if d.doubly_material)
+    risk_only = sum(1 for d in all_scored if d.iro_type == "Risk" and not d.doubly_material)
+    impact_only = sum(1 for d in all_scored if d.iro_type == "Impact" and not d.doubly_material)
+    low_priority = sum(1 for d in all_scored if d.iro_type == "Low priority")
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Doubly Material", doubly, help="Material on both financial and impact dimensions")
+    c2.metric("Risk (Financial) only", risk_only, help="Material financially but low impact")
+    c3.metric("Impact only", impact_only, help="High impact but low financial materiality")
+    c4.metric("Low priority", low_priority, help="Low on both dimensions")
+
+    st.markdown("---")
+
+    # Double materiality matrix
+    matrix_fig = charts.render_double_materiality_matrix(base)
+    st.plotly_chart(matrix_fig, use_container_width=True)
+
+    st.markdown("---")
+    st.markdown("### IRO Register")
+    st.caption(
+        "Impacts, Risks and Opportunities register. "
+        "Sorted by doubly-material items first, then by financial materiality score."
+    )
+
+    iro_df = _iro_register_dataframe(base)
+    if not iro_df.empty:
+        styled = iro_df.style.map(_style_iro_cell, subset=["Financial", "Impact"])
+        st.dataframe(
+            styled,
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Fin Score": st.column_config.ProgressColumn("Fin", min_value=0, max_value=3, format="%d"),
+                "Imp Score": st.column_config.ProgressColumn("Imp", min_value=0, max_value=3, format="%d"),
+                "Label": st.column_config.TextColumn("Dependency", width="large"),
+                "Doubly Material": st.column_config.TextColumn("✓ DM", width="small"),
+            },
+        )
+    else:
+        st.info("No dependencies scored.")
+
+    st.markdown("---")
+    st.markdown("### Stakeholder Assessment")
+    st.caption(
+        "Adjust scores to reflect your organisation's stakeholder view. "
+        "These overrides update the matrix and IRO register above on re-run."
+    )
+    new_overrides = stakeholder_ui.render_stakeholder_panel(report)
+
+    # Trigger rerun if overrides changed
+    if new_overrides:
+        current_key = _overrides_key(new_overrides)
+        prev_key = st.session_state.get("_override_key", "")
+        if current_key != prev_key:
+            st.session_state["_override_key"] = current_key
+            st.rerun()
+
+
+def _collect_existing_overrides(base: DependencyReport):
+    """Read stakeholder overrides stored in session state."""
+    from app.models import StakeholderOverride, MaterialityScore
+
+    overrides_state = st.session_state.get("stakeholder_overrides", {})
+    stakeholder_name = st.session_state.get("stakeholder_name", "")
+    _OPTION_TO_SCORE = {
+        "No view": None,
+        "Low": MaterialityScore.LOW,
+        "Medium": MaterialityScore.MEDIUM,
+        "High": MaterialityScore.HIGH,
+    }
+
+    result = []
+    for dep_id, values in overrides_state.items():
+        fin = _OPTION_TO_SCORE.get(values.get("financial", "No view"))
+        imp = _OPTION_TO_SCORE.get(values.get("impact", "No view"))
+        notes = values.get("notes", "")
+        if fin is not None or imp is not None or notes:
+            result.append(StakeholderOverride(
+                dependency_id=dep_id,
+                stakeholder_financial=fin,
+                stakeholder_impact=imp,
+                notes=notes,
+                stakeholder_name=stakeholder_name,
+            ))
+    return result
+
+
+def _overrides_key(overrides) -> str:
+    return "|".join(
+        f"{o.dependency_id}:{o.stakeholder_financial}:{o.stakeholder_impact}:{o.notes}"
+        for o in sorted(overrides, key=lambda x: x.dependency_id)
+    )
+
+
 def render_export_row(report: AnyReport, company_name: str) -> None:
     st.markdown("---")
     st.markdown("#### Export Results")
     safe_name = company_name.replace(" ", "_").replace("/", "-")[:20]
 
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.download_button(
             label="⬇ JSON",
@@ -204,6 +357,14 @@ def render_export_row(report: AnyReport, company_name: str) -> None:
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             use_container_width=True,
         )
+    with c4:
+        st.download_button(
+            label="⬇ IRO Register",
+            data=to_iro_register_csv(report),
+            file_name=f"{safe_name}_iro_register.csv",
+            mime="text/csv",
+            use_container_width=True,
+        )
 
 
 def render_results(report: AnyReport) -> None:
@@ -214,7 +375,13 @@ def render_results(report: AnyReport) -> None:
     render_metrics_row(base)
 
     st.markdown("---")
-    tabs = st.tabs(["🌿 Natural Capital", "🤝 Social Capital", "👷 Human Capital", "📊 Overview"])
+    tabs = st.tabs([
+        "🌿 Natural Capital",
+        "🤝 Social Capital",
+        "👷 Human Capital",
+        "📊 Overview",
+        "⚖️ Double Materiality",
+    ])
 
     with tabs[0]:
         render_capital_panel(base.natural_capital, "Natural Capital")
@@ -224,5 +391,7 @@ def render_results(report: AnyReport) -> None:
         render_capital_panel(base.human_capital, "Human Capital")
     with tabs[3]:
         render_overview_tab(report)
+    with tabs[4]:
+        render_double_materiality_tab(report)
 
     render_export_row(report, company.name)

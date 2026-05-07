@@ -15,6 +15,7 @@ from app.models import (
     MATERIALITY_NUMERIC,
     SASBIndustryMapping,
     ScoredDependency,
+    StakeholderOverride,
 )
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
@@ -140,6 +141,62 @@ def _resolve_materiality(
     return MaterialityScore.NOT_APPLICABLE, "Not applicable for this sector"
 
 
+def _resolve_impact(
+    dep: DependencyItem,
+    sasb_code: str,
+    sasb_sector_prefix: str,
+) -> tuple[MaterialityScore, str]:
+    """
+    Same three-tier fallback as _resolve_materiality, but reads sasb_industry_impact.
+    Returns (MaterialityScore, basis_note).
+    """
+    impact_map = dep.sasb_industry_impact
+
+    if not impact_map:
+        # If no impact map provided, fall back to materiality map
+        return _resolve_materiality(dep, sasb_code, sasb_sector_prefix)
+
+    # Tier 1: exact
+    if sasb_code in impact_map:
+        raw = impact_map[sasb_code]
+        return _parse_score(raw), f"SASB {sasb_code} (direct impact)"
+
+    # Tier 2: sector prefix
+    prefix_scores = [
+        _SCORE_ORDER.get(v, 0)
+        for k, v in impact_map.items()
+        if k.startswith(sasb_sector_prefix + "-")
+    ]
+    if prefix_scores:
+        best_num = max(prefix_scores)
+        score = _num_to_score(best_num)
+        return score, f"SASB sector '{sasb_sector_prefix}' (prefix impact)"
+
+    # Tier 3: global baseline (use same deps as financial materiality)
+    if dep.id in _GLOBAL_BASELINE:
+        raw = _GLOBAL_BASELINE[dep.id]
+        return _parse_score(raw), "Global baseline (impact)"
+
+    return MaterialityScore.NOT_APPLICABLE, "Not applicable (impact)"
+
+
+def _classify_iro(
+    fin_score: MaterialityScore,
+    imp_score: MaterialityScore,
+) -> tuple[bool, str]:
+    """Return (doubly_material, iro_type) based on combined scores."""
+    fin_num = MATERIALITY_NUMERIC[fin_score]
+    imp_num = MATERIALITY_NUMERIC[imp_score]
+    doubly = fin_num >= 2 and imp_num >= 2
+    if fin_num >= 2 and imp_num >= 2:
+        return True, "Impact & Risk"
+    if fin_num >= 2:
+        return False, "Risk"
+    if imp_num >= 2:
+        return False, "Impact"
+    return False, "Low priority"
+
+
 def _parse_score(raw: str) -> MaterialityScore:
     mapping = {
         "high": MaterialityScore.HIGH,
@@ -168,7 +225,8 @@ def _build_rationale(dep: DependencyItem, score: MaterialityScore, basis: str) -
 def score_dependencies(company: CompanyProfile) -> DependencyReport:
     """
     Run the rule-based scoring pipeline for a company.
-    Returns a DependencyReport with all three capital panels populated.
+    Returns a DependencyReport with all three capital panels populated,
+    including both financial materiality and impact materiality scores.
     """
     sasb_mapping = resolve_sasb_industry(company.gics_sector, company.gics_industry)
     sasb_code = sasb_mapping.sasb_industry_code
@@ -185,29 +243,38 @@ def score_dependencies(company: CompanyProfile) -> DependencyReport:
 
     for key, deps in dep_data.items():
         for dep in deps:
-            score, basis = _resolve_materiality(dep, sasb_code, sasb_prefix)
-            if score == MaterialityScore.NOT_APPLICABLE:
+            fin_score, fin_basis = _resolve_materiality(dep, sasb_code, sasb_prefix)
+            imp_score, _ = _resolve_impact(dep, sasb_code, sasb_prefix)
+
+            # Include if either financial or impact score is material (≥ low)
+            if fin_score == MaterialityScore.NOT_APPLICABLE and imp_score == MaterialityScore.NOT_APPLICABLE:
                 continue
-            rationale = _build_rationale(dep, score, basis)
+
+            # Use the higher of the two to determine inclusion
+            effective_score = fin_score if MATERIALITY_NUMERIC[fin_score] >= MATERIALITY_NUMERIC[imp_score] else imp_score
+            if effective_score == MaterialityScore.NOT_APPLICABLE:
+                continue
+
+            doubly_material, iro_type = _classify_iro(fin_score, imp_score)
+            rationale = _build_rationale(dep, fin_score, fin_basis)
+
             panels[key].append(
                 ScoredDependency(
                     dependency=dep,
-                    materiality_score=score,
-                    materiality_numeric=MATERIALITY_NUMERIC[score],
+                    materiality_score=fin_score,
+                    materiality_numeric=MATERIALITY_NUMERIC[fin_score],
+                    impact_score=imp_score,
+                    impact_numeric=MATERIALITY_NUMERIC[imp_score],
+                    doubly_material=doubly_material,
+                    iro_type=iro_type,
                     rationale=rationale,
-                    sasb_basis=basis,
+                    sasb_basis=fin_basis,
                 )
             )
 
-    # Sort each panel: high → medium → low
+    # Sort each panel: high financial → medium → low
     for scored_list in panels.values():
         scored_list.sort(key=lambda s: s.materiality_numeric, reverse=True)
-
-    capital_type_map = {
-        "natural_capital": CapitalType.NATURAL,
-        "social_capital": CapitalType.SOCIAL,
-        "human_capital": CapitalType.HUMAN,
-    }
 
     return DependencyReport(
         company=company,
@@ -224,4 +291,71 @@ def score_dependencies(company: CompanyProfile) -> DependencyReport:
             capital_type=CapitalType.HUMAN,
             dependencies=panels["human_capital"],
         ),
+    )
+
+
+def apply_stakeholder_overrides(
+    report: DependencyReport,
+    overrides: list[StakeholderOverride],
+) -> DependencyReport:
+    """
+    Apply stakeholder-supplied score adjustments to a report.
+    Returns a new DependencyReport with adjusted ScoredDependency entries.
+    Stakeholder overrides take precedence over rule-based scores and are flagged
+    via llm_adjusted=True with a note identifying the stakeholder source.
+    """
+    if not overrides:
+        return report
+
+    override_map = {o.dependency_id: o for o in overrides}
+
+    def _apply_to_panel(panel: CapitalPanel) -> CapitalPanel:
+        new_deps = []
+        for scored in panel.dependencies:
+            override = override_map.get(scored.dependency.id)
+            if override is None:
+                new_deps.append(scored)
+                continue
+
+            fin_score = override.stakeholder_financial or scored.materiality_score
+            imp_score = override.stakeholder_impact or scored.impact_score
+            doubly_material, iro_type = _classify_iro(fin_score, imp_score)
+
+            parts = []
+            if override.stakeholder_financial:
+                parts.append(f"Financial: {scored.materiality_score.value} → {fin_score.value}")
+            if override.stakeholder_impact:
+                parts.append(f"Impact: {scored.impact_score.value} → {imp_score.value}")
+            if override.notes:
+                parts.append(f"Note: {override.notes}")
+            if override.stakeholder_name:
+                parts.append(f"By: {override.stakeholder_name}")
+
+            new_deps.append(
+                ScoredDependency(
+                    dependency=scored.dependency,
+                    materiality_score=fin_score,
+                    materiality_numeric=MATERIALITY_NUMERIC[fin_score],
+                    impact_score=imp_score,
+                    impact_numeric=MATERIALITY_NUMERIC[imp_score],
+                    doubly_material=doubly_material,
+                    iro_type=iro_type,
+                    rationale=scored.rationale,
+                    sasb_basis=scored.sasb_basis,
+                    llm_adjusted=True,
+                    llm_adjustment_note=" | ".join(parts) if parts else "Stakeholder override applied",
+                )
+            )
+        return CapitalPanel(capital_type=panel.capital_type, dependencies=new_deps)
+
+    return DependencyReport(
+        company=report.company,
+        sasb_mapping=report.sasb_mapping,
+        natural_capital=_apply_to_panel(report.natural_capital),
+        social_capital=_apply_to_panel(report.social_capital),
+        human_capital=_apply_to_panel(report.human_capital),
+        generated_at=report.generated_at,
+        llm_enriched=report.llm_enriched,
+        frameworks_used=report.frameworks_used,
+        stakeholder_overrides=overrides,
     )

@@ -5,8 +5,15 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 
-from app.models import CapitalPanel, DependencyReport, MaterialityScore
+from app.models import CapitalPanel, CapitalType, DependencyReport, MaterialityScore
 from app.ui.theme import COLOUR_HIGH, COLOUR_MEDIUM, COLOUR_LOW, COLOUR_NA
+
+# Colours for each capital type in the double materiality matrix
+_CAPITAL_COLOURS = {
+    CapitalType.NATURAL: "#2e7d32",   # green
+    CapitalType.SOCIAL: "#1565c0",    # blue
+    CapitalType.HUMAN: "#e65100",     # orange
+}
 
 
 _SCORE_COLOUR_MAP = {
@@ -107,6 +114,134 @@ def render_score_distribution(panel: CapitalPanel) -> go.Figure:
         height=200,
         showlegend=True,
         legend=dict(orientation="h", y=-0.1),
+    )
+    return fig
+
+
+def render_double_materiality_matrix(report: DependencyReport) -> go.Figure:
+    """
+    Scatter plot placing each scored dependency at (financial materiality, impact materiality).
+    Quadrant lines at 1.5 divide the space into four zones:
+      top-right  = Doubly Material
+      top-left   = Impact only
+      bottom-right = Risk (Financial) only
+      bottom-left  = Low priority
+    Points are coloured by capital type; LLM-adjusted points use a diamond marker.
+    """
+    panels = [
+        (report.natural_capital, CapitalType.NATURAL),
+        (report.social_capital, CapitalType.SOCIAL),
+        (report.human_capital, CapitalType.HUMAN),
+    ]
+
+    traces: dict[CapitalType, dict] = {
+        cap_type: {"x": [], "y": [], "text": [], "symbol": [], "esrs": []}
+        for _, cap_type in panels
+    }
+
+    for panel, cap_type in panels:
+        for scored in panel.dependencies:
+            d = traces[cap_type]
+            d["x"].append(scored.materiality_numeric + (0.05 if scored.llm_adjusted else 0))
+            d["y"].append(scored.impact_numeric + (0.05 if scored.llm_adjusted else 0))
+            d["symbol"].append("diamond" if scored.llm_adjusted else "circle")
+            esrs = scored.dependency.esrs_topic or ""
+            d["text"].append(
+                f"<b>{scored.dependency.label}</b><br>"
+                f"ESRS: {esrs}<br>"
+                f"Financial: {scored.materiality_score.value.upper()}<br>"
+                f"Impact: {scored.impact_score.value.upper()}<br>"
+                f"IRO: {scored.iro_type}"
+            )
+            d["esrs"].append(esrs)
+
+    fig = go.Figure()
+
+    label_map = {
+        CapitalType.NATURAL: "Natural Capital",
+        CapitalType.SOCIAL: "Social Capital",
+        CapitalType.HUMAN: "Human Capital",
+    }
+
+    for cap_type, d in traces.items():
+        if not d["x"]:
+            continue
+        colour = _CAPITAL_COLOURS[cap_type]
+        fig.add_trace(
+            go.Scatter(
+                x=d["x"],
+                y=d["y"],
+                mode="markers+text",
+                marker=dict(
+                    size=12,
+                    color=colour,
+                    symbol=d["symbol"],
+                    line=dict(width=1, color="white"),
+                    opacity=0.85,
+                ),
+                text=["" for _ in d["x"]],
+                hovertext=d["text"],
+                hoverinfo="text",
+                name=label_map[cap_type],
+                legendgroup=label_map[cap_type],
+            )
+        )
+
+    # Quadrant divider lines
+    threshold = 1.5
+    line_style = dict(color="rgba(100,100,100,0.4)", width=1.5, dash="dash")
+    fig.add_shape(type="line", x0=threshold, x1=threshold, y0=-0.2, y1=3.4, line=line_style)
+    fig.add_shape(type="line", x0=-0.2, x1=3.4, y0=threshold, y1=threshold, line=line_style)
+
+    # Quadrant background shading
+    fig.add_shape(type="rect", x0=threshold, x1=3.4, y0=threshold, y1=3.4,
+                  fillcolor="rgba(213,0,0,0.06)", line_width=0)
+    fig.add_shape(type="rect", x0=-0.2, x1=threshold, y0=threshold, y1=3.4,
+                  fillcolor="rgba(255,143,0,0.06)", line_width=0)
+    fig.add_shape(type="rect", x0=threshold, x1=3.4, y0=-0.2, y1=threshold,
+                  fillcolor="rgba(255,143,0,0.06)", line_width=0)
+    fig.add_shape(type="rect", x0=-0.2, x1=threshold, y0=-0.2, y1=threshold,
+                  fillcolor="rgba(158,158,158,0.06)", line_width=0)
+
+    # Quadrant labels
+    for x, y, label in [
+        (2.6, 3.2, "⬛ Doubly Material"),
+        (0.5, 3.2, "Impact only"),
+        (2.6, 0.3, "Risk only"),
+        (0.5, 0.3, "Low priority"),
+    ]:
+        fig.add_annotation(
+            x=x, y=y, text=label, showarrow=False,
+            font=dict(size=10, color="rgba(80,80,80,0.7)"),
+        )
+
+    fig.update_layout(
+        xaxis=dict(
+            title="Financial Materiality (outside-in)",
+            range=[-0.2, 3.4],
+            tickvals=[1, 2, 3],
+            ticktext=["Low", "Medium", "High"],
+            gridcolor="rgba(200,200,200,0.3)",
+        ),
+        yaxis=dict(
+            title="Impact Materiality (inside-out)",
+            range=[-0.2, 3.4],
+            tickvals=[1, 2, 3],
+            ticktext=["Low", "Medium", "High"],
+            gridcolor="rgba(200,200,200,0.3)",
+        ),
+        legend=dict(
+            orientation="h", y=-0.15, x=0.5, xanchor="center",
+            font=dict(size=11),
+        ),
+        margin=dict(l=60, r=20, t=50, b=80),
+        height=480,
+        title=dict(
+            text="Double Materiality Matrix",
+            x=0.5, font=dict(size=14),
+        ),
+        plot_bgcolor="white",
+        paper_bgcolor="white",
     )
     return fig
 

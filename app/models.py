@@ -83,7 +83,9 @@ class DependencyItem(BaseModel):
     tnfd_pillar: Optional[str] = None
     capital_protocol_category: str
     sasb_disclosure_topic: str
+    esrs_topic: Optional[str] = None
     sasb_industry_materiality: dict[str, str] = Field(default_factory=dict)
+    sasb_industry_impact: dict[str, str] = Field(default_factory=dict)
     indicators: list[str] = Field(default_factory=list)
 
 
@@ -91,6 +93,10 @@ class ScoredDependency(BaseModel):
     dependency: DependencyItem
     materiality_score: MaterialityScore
     materiality_numeric: int  # 3 / 2 / 1 / 0
+    impact_score: MaterialityScore = MaterialityScore.NOT_APPLICABLE
+    impact_numeric: int = 0
+    doubly_material: bool = False
+    iro_type: str = ""  # "Impact & Risk" | "Risk" | "Impact" | "Low priority"
     rationale: str
     sasb_basis: str  # SASB code that drove the score
     llm_adjusted: bool = False
@@ -128,8 +134,22 @@ class DependencyReport(BaseModel):
             "SASB Standards 2023",
             "Capital Coalition Natural Capital Protocol",
             "Capital Coalition Social & Human Capital Protocol",
+            "CSRD/ESRS 2024",
         ]
     )
+    stakeholder_overrides: list["StakeholderOverride"] = Field(default_factory=list)
+
+
+# ---------------------------------------------------------------------------
+# Stakeholder input
+# ---------------------------------------------------------------------------
+
+class StakeholderOverride(BaseModel):
+    dependency_id: str
+    stakeholder_financial: Optional[MaterialityScore] = None
+    stakeholder_impact: Optional[MaterialityScore] = None
+    notes: str = ""
+    stakeholder_name: str = ""
 
 
 # ---------------------------------------------------------------------------
