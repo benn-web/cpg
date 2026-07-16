@@ -87,6 +87,7 @@ class DependencyItem(BaseModel):
     sasb_industry_materiality: dict[str, str] = Field(default_factory=dict)
     sasb_industry_impact: dict[str, str] = Field(default_factory=dict)
     indicators: list[str] = Field(default_factory=list)
+    sources: list[str] = Field(default_factory=list)
 
 
 class ScoredDependency(BaseModel):

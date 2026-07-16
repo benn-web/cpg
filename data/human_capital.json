@@ -1,6 +1,9 @@
 {
   "version": "2024-01",
-  "frameworks": ["SASB Standards 2023", "Human Capital Protocol (Capital Coalition)"],
+  "frameworks": [
+    "SASB Standards 2023",
+    "Human Capital Protocol (Capital Coalition)"
+  ],
   "dependencies": [
     {
       "id": "HC-001",
@@ -74,6 +77,13 @@
         "Fatalities (number)",
         "Near-miss events reported",
         "% of workforce covered by health & safety management system"
+      ],
+      "sources": [
+        "SASB Employee Health & Safety topic (EM-EP-320a, TR-AU-320a, FB-AG-320a)",
+        "ESRS S1 Own Workforce \u2014 Paragraphs 67\u201374 (H&S management, TRIR, fatalities)",
+        "UK Health and Safety at Work Act 1974 \u2014 Section 2 (employer duty of care)",
+        "GRI 403: Occupational Health and Safety 2018 (GRI 403-9 Work-related injuries)",
+        "ILO Convention 155 (Occupational Safety and Health) 1981"
       ]
     },
     {
@@ -82,7 +92,7 @@
       "category": "Health & Safety",
       "subcategory": "Process & Asset Safety",
       "label": "Process Safety & Operational Integrity",
-      "description": "Risk of major accident hazards in hazardous installations (refineries, chemical plants, mines). Distinct from occupational safety — process safety failures can cause catastrophic events affecting communities and the environment.",
+      "description": "Risk of major accident hazards in hazardous installations (refineries, chemical plants, mines). Distinct from occupational safety \u2014 process safety failures can cause catastrophic events affecting communities and the environment.",
       "tnfd_ecosystem_service": null,
       "tnfd_pillar": null,
       "capital_protocol_category": "Human Capital",
@@ -122,6 +132,13 @@
         "Process Safety Event (PSE) rate (Tier 1 & Tier 2)",
         "Asset integrity inspection coverage (%)",
         "Unplanned operational downtime due to safety issues"
+      ],
+      "sources": [
+        "SASB Process Safety topic (EM-EP-540a, RT-CH-540a)",
+        "ESRS S1 Own Workforce \u2014 major accident hazard disclosures",
+        "UK Control of Major Accident Hazards Regulations (COMAH) 2015",
+        "IChemE (Institution of Chemical Engineers) Process Safety Framework",
+        "API (American Petroleum Institute) RP 754 \u2014 Process Safety Performance Indicators"
       ]
     },
     {
@@ -178,6 +195,13 @@
         "% employees from ethnic minority backgrounds",
         "Disability representation (%)",
         "DEI initiatives and targets in place"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 Paragraphs 52\u201360 (diversity, representation targets)",
+        "UK Equality Act 2010 \u2014 Protected characteristics (\u00a74) and positive action (\u00a7158)",
+        "UK Gender Pay Gap Reporting Regulations 2017 \u2014 mandatory employer reporting",
+        "SASB Employee Engagement, Diversity & Inclusion topic",
+        "GRI 405: Diversity and Equal Opportunity 2016 (GRI 405-1 Board diversity)"
       ]
     },
     {
@@ -223,6 +247,13 @@
         "Pay ratio: CEO to median worker",
         "Living wage accreditation status",
         "% of workforce on zero-hours or insecure contracts"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 pay equity and fair wages disclosures",
+        "UK Equality Act 2010 \u2014 Equal Pay provisions (\u00a7\u00a764\u201380)",
+        "UK Gender Pay Gap Reporting Regulations 2017 \u2014 mean/median pay gap",
+        "GRI 405: Diversity and Equal Opportunity 2016 (GRI 405-2 Ratio of basic salary)",
+        "Living Wage Foundation \u2014 UK Real Living Wage (\u00a312.60/hour from April 2024)"
       ]
     },
     {
@@ -286,6 +317,13 @@
         "Number of working days lost to industrial action",
         "Employee engagement score (%)",
         "Union recognition agreements in place"
+      ],
+      "sources": [
+        "ILO Conventions 87 (Freedom of Association) & 98 (Right to Organise) 1948/1949",
+        "ESRS S1 Own Workforce \u2014 Paragraphs 43\u201351 (collective bargaining, social dialogue)",
+        "Trade Union and Labour Relations (Consolidation) Act 1992 (UK)",
+        "SASB Labor Practices topic (EM-EP-310a, TR-AF-310a)",
+        "GRI 402: Labor/Management Relations 2016 (GRI 402-1 Minimum notice periods)"
       ]
     },
     {
@@ -338,7 +376,14 @@
         "Headcount change (%)",
         "Voluntary vs. involuntary turnover rate",
         "% of affected workers supported with retraining/outplacement",
-        "Redundancy costs (£)"
+        "Redundancy costs (\u00a3)"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 Paragraphs 61\u201366 (restructuring impact on workers)",
+        "UK Employment Rights Act 1996 \u2014 redundancy consultation requirements",
+        "ILO Convention 158 (Termination of Employment) 1982",
+        "SASB Labor Practices topic \u2014 workforce turnover and restructuring",
+        "GRI 401: Employment 2016 (GRI 401-1 New hires and employee turnover)"
       ]
     },
     {
@@ -402,6 +447,13 @@
         "Employee engagement score (%)",
         "Time to fill critical roles (days)",
         "Employer brand perception / Glassdoor score"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 employee engagement and retention metrics",
+        "SASB Employee Engagement, Diversity & Inclusion topic \u2014 voluntary turnover",
+        "CIPD (Chartered Institute of Personnel and Development) \u2014 Resourcing & Talent reports",
+        "GRI 401: Employment 2016 (GRI 401-1 New employee hires)",
+        "UK ONS Labour Market Overview \u2014 sector-level vacancy and turnover data"
       ]
     },
     {
@@ -456,9 +508,16 @@
       },
       "indicators": [
         "Average training hours per employee per year",
-        "Training investment per employee (£)",
+        "Training investment per employee (\u00a3)",
         "% of workforce with individual development plans",
         "Apprentices and graduates recruited annually"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 Paragraphs 77\u201383 (training hours, development spend)",
+        "UK Apprenticeships & Technical Education Strategy \u2014 levy-funded training",
+        "SASB Employee Engagement, Diversity & Inclusion topic \u2014 training hours",
+        "GRI 404: Training and Education 2016 (GRI 404-1 Average hours of training)",
+        "ILO Recommendation 195 \u2014 Human Resources Development 2004"
       ]
     },
     {
@@ -504,8 +563,15 @@
       "indicators": [
         "Transition skills strategy published (Y/N)",
         "% of high-carbon roles with reskilling pathways",
-        "Investment in green skills training (£)",
+        "Investment in green skills training (\u00a3)",
         "Partnerships with educational institutions for transition skills"
+      ],
+      "sources": [
+        "ILO Guidelines for a Just Transition towards Environmentally Sustainable Economies 2015",
+        "ESRS S1 Own Workforce \u2014 just transition workforce provisions",
+        "UK Net Zero Strategy 2021 \u2014 'Green Jobs Taskforce' reskilling commitments",
+        "SASB Labor Practices topic \u2014 transition skills and workforce planning",
+        "European Green Deal \u2014 Just Transition Mechanism (Pillar 1: JTF)"
       ]
     },
     {
@@ -561,6 +627,13 @@
         "Mental health support programmes in place",
         "% of managers trained in mental health first aid",
         "Employee wellbeing index score"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 Paragraphs 75\u201376 (psychological health & wellbeing)",
+        "UK Health and Safety at Work Act 1974 \u2014 psychological safety obligations",
+        "CIPD Health and Wellbeing at Work Survey 2024 \u2014 sector benchmarks",
+        "NHS Long Term Plan 2019 \u2014 mental health service expansion targets",
+        "GRI 403: Occupational Health and Safety 2018 \u2014 work-related ill health"
       ]
     },
     {
@@ -603,6 +676,13 @@
         "% of senior roles with identified successors",
         "Internal promotion rate (%)",
         "Board and executive diversity"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 board-level succession and leadership pipeline",
+        "UK Corporate Governance Code 2018 \u2014 Provision 23 (succession planning)",
+        "Parker Review on Ethnic Diversity on FTSE 350 Boards (2017, updated 2020)",
+        "SASB Employee Engagement, Diversity & Inclusion topic \u2014 internal promotion rate",
+        "GRI 401: Employment 2016 \u2014 workforce planning disclosures"
       ]
     },
     {
@@ -654,6 +734,13 @@
         "Contractor safety incident rate",
         "Contractor living wage compliance (%)",
         "Worker misclassification legal challenges"
+      ],
+      "sources": [
+        "ESRS S1 Own Workforce \u2014 Paragraph 48 (contractors and non-employee workers)",
+        "Taylor Review of Modern Working Practices 2017 \u2014 employment status reform",
+        "UK Employment Rights Bill 2024 \u2014 'worker' status clarification, day-one rights",
+        "GRI 403: Occupational Health and Safety 2018 \u2014 contractor safety management",
+        "ILO Recommendation 198 (Employment Relationship) 2006 \u2014 misclassification"
       ]
     }
   ]

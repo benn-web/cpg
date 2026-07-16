@@ -1,6 +1,9 @@
 {
   "version": "2024-01",
-  "frameworks": ["SASB Standards 2023", "Social Capital Protocol (Capital Coalition)"],
+  "frameworks": [
+    "SASB Standards 2023",
+    "Social Capital Protocol (Capital Coalition)"
+  ],
   "dependencies": [
     {
       "id": "SC-001",
@@ -52,9 +55,16 @@
       },
       "indicators": [
         "Number of significant community complaints/grievances",
-        "Community investment spend (£)",
+        "Community investment spend (\u00a3)",
         "FPIC (Free, Prior, Informed Consent) policies in place (Y/N)",
         "Number of community-disruption incidents"
+      ],
+      "sources": [
+        "SASB Community Relations topic (EM-EP-210a, IF-EU-210a, IF-HB-210a)",
+        "ESRS S3 Affected Communities \u2014 Paragraphs 8\u201316 (social licence, engagement)",
+        "IFC Performance Standard 1 (2012) \u2014 Stakeholder Engagement",
+        "FPIC \u2014 ILO Convention 169 (Indigenous and Tribal Peoples Convention)",
+        "UN Guiding Principles on Business & Human Rights 2011 \u2014 Pillar 3 (Remedy)"
       ]
     },
     {
@@ -106,6 +116,13 @@
         "Human rights due diligence assessment conducted (Y/N)",
         "Number of human rights incidents in supply chain",
         "% of operations with community benefit agreements"
+      ],
+      "sources": [
+        "UN Declaration on the Rights of Indigenous Peoples (UNDRIP) 2007",
+        "IFC Performance Standard 7 (2012) \u2014 Indigenous Peoples",
+        "UN Guiding Principles on Business & Human Rights 2011 \u2014 Human Rights Due Diligence",
+        "ESRS S3 Affected Communities \u2014 specific provisions on indigenous peoples",
+        "OECD Guidelines for Multinational Enterprises 2023 \u2014 Chapter IV (Human Rights)"
       ]
     },
     {
@@ -162,7 +179,14 @@
         "Number of material data breaches",
         "Customers affected by data breaches",
         "% of employees trained on data privacy annually",
-        "GDPR fines incurred (£)"
+        "GDPR fines incurred (\u00a3)"
+      ],
+      "sources": [
+        "UK GDPR (General Data Protection Regulation) / Data Protection Act 2018",
+        "ESRS S4 Consumers and End-users \u2014 Paragraphs 9\u201312 (privacy, data security)",
+        "SASB Customer Privacy topic (FN-CB-230a, TC-SI-230a, HC-BP-230a)",
+        "ISO/IEC 27001:2022 \u2014 Information Security Management Systems",
+        "ICO (Information Commissioner's Office) \u2014 Data Protection Accountability Framework"
       ]
     },
     {
@@ -210,6 +234,13 @@
         "Affordability measures / hardship schemes in place",
         "Complaints related to access or affordability",
         "Geographic coverage / service gaps"
+      ],
+      "sources": [
+        "ESRS S4 Consumers and End-users \u2014 Paragraphs 13\u201316 (access & affordability)",
+        "SASB Access & Affordability topic (FN-CB-240a, HC-BP-240a, IF-WU-240a)",
+        "FCA Consumer Duty 2023 \u2014 four consumer outcomes framework",
+        "UN SDG 10 (Reduced Inequalities) \u2014 equal access to financial services",
+        "UK Equality Act 2010 \u2014 Duty to make reasonable adjustments"
       ]
     },
     {
@@ -262,9 +293,16 @@
       },
       "indicators": [
         "Product recalls (number and units affected)",
-        "Product-liability claims (£)",
+        "Product-liability claims (\u00a3)",
         "Regulatory warnings or fines for product safety",
         "Customer satisfaction / NPS score"
+      ],
+      "sources": [
+        "SASB Product Quality & Safety topic (HC-BP-250a, FB-AG-250a, TR-AU-250a)",
+        "ESRS S4 Consumers and End-users \u2014 product safety disclosures",
+        "UK Consumer Rights Act 2015 \u2014 satisfactory quality, fitness for purpose",
+        "GRI 416: Customer Health and Safety 2016",
+        "EU General Product Safety Regulation 2023 (GPSR)"
       ]
     },
     {
@@ -313,6 +351,13 @@
         "Regulatory sanctions for mis-selling",
         "Number of customer complaints upheld",
         "% of products with accurate sustainability claims"
+      ],
+      "sources": [
+        "SASB Selling Practices & Product Labeling topic (FN-CB-270a, FB-TB-270a)",
+        "ESRS S4 Consumers and End-users \u2014 marketing and labelling practices",
+        "FCA Principles for Business \u2014 Principle 6 (Customers' Interests)",
+        "ASA UK Advertising Codes \u2014 misleading advertising rules",
+        "EU Green Claims Directive (proposed 2023) \u2014 substantiation requirements"
       ]
     },
     {
@@ -370,6 +415,13 @@
         "Modern slavery statements published (Y/N)",
         "Number of supplier non-conformances on labour standards",
         "% of Tier 1 suppliers with living wage compliance"
+      ],
+      "sources": [
+        "UK Modern Slavery Act 2015 \u2014 \u00a754 Transparency in Supply Chains",
+        "ESRS S2 Workers in the Value Chain \u2014 Paragraphs 9\u201317 (due diligence, wages)",
+        "ILO Core Labour Standards \u2014 Conventions 29, 87, 98, 105, 111, 138, 182",
+        "UN Guiding Principles on Business & Human Rights 2011 \u2014 HRDD in supply chains",
+        "OECD Due Diligence Guidance for Responsible Business Conduct 2018"
       ]
     },
     {
@@ -378,7 +430,7 @@
       "category": "Supply Chain",
       "subcategory": "Supplier Diversity & Resilience",
       "label": "Supply Chain Resilience & Diversity",
-      "description": "Concentration risk in supply chains — single-source dependencies, geographic concentration, and supplier financial health. Supply disruptions create operational and financial risk, as highlighted by pandemic and geopolitical events.",
+      "description": "Concentration risk in supply chains \u2014 single-source dependencies, geographic concentration, and supplier financial health. Supply disruptions create operational and financial risk, as highlighted by pandemic and geopolitical events.",
       "tnfd_ecosystem_service": null,
       "tnfd_pillar": null,
       "capital_protocol_category": "Social Capital",
@@ -423,8 +475,15 @@
       "indicators": [
         "Number of single-source critical inputs",
         "% of spend with top 10 suppliers",
-        "Supply chain disruptions (number and £ impact)",
+        "Supply chain disruptions (number and \u00a3 impact)",
         "% of suppliers with business continuity plans"
+      ],
+      "sources": [
+        "ESRS S2 Workers in the Value Chain \u2014 supply chain mapping requirements",
+        "SASB Supply Chain Management topic (TC-HW-430a, FB-AG-430a)",
+        "ISO 28000:2022 \u2014 Security and Resilience \u2014 Supply Chain Security Management",
+        "UK National Risk Register 2023 \u2014 supply chain concentration risks",
+        "World Bank Enterprise Surveys \u2014 supply chain diversification indicators"
       ]
     },
     {
@@ -478,10 +537,17 @@
         "TR-AF": "medium"
       },
       "indicators": [
-        "Material regulatory fines (£)",
+        "Material regulatory fines (\u00a3)",
         "Number of material regulatory investigations",
         "Anti-bribery & corruption training coverage (%)",
-        "Political contributions (£)"
+        "Political contributions (\u00a3)"
+      ],
+      "sources": [
+        "ESRS G1 Business Conduct \u2014 Paragraphs 7\u201314 (corporate culture, anti-bribery)",
+        "SASB Business Ethics topic (FN-CB-510a, EM-EP-510a)",
+        "UK Bribery Act 2010 \u2014 Section 7 (failure to prevent bribery)",
+        "GRI 205: Anti-corruption 2016 (GRI 205-1 Operations assessed for corruption risk)",
+        "OECD Anti-Bribery Convention 1997 \u2014 enforced via UK Serious Fraud Office"
       ]
     },
     {
@@ -528,8 +594,15 @@
       },
       "indicators": [
         "Competition authority investigations (number and outcome)",
-        "Competition law fines incurred (£)",
+        "Competition law fines incurred (\u00a3)",
         "Market concentration / market share"
+      ],
+      "sources": [
+        "Competition Act 1998 (UK) \u2014 Chapter I & II prohibitions",
+        "TFEU Articles 101\u2013102 \u2014 EU competition law (cartel conduct, abuse of dominance)",
+        "ESRS G1 Business Conduct \u2014 anti-competitive behaviour disclosures",
+        "GRI 206: Anti-competitive Behaviour 2016",
+        "CMA (Competition and Markets Authority) \u2014 UK enforcement priorities 2024"
       ]
     },
     {
@@ -571,10 +644,17 @@
         "SV-ME": "low"
       },
       "indicators": [
-        "Total taxes paid (£)",
+        "Total taxes paid (\u00a3)",
         "Local procurement spend (%)",
         "Jobs supported in local communities",
-        "Community investment (£ and % of pre-tax profit)"
+        "Community investment (\u00a3 and % of pre-tax profit)"
+      ],
+      "sources": [
+        "ESRS S3 Affected Communities \u2014 Paragraphs 17\u201322 (local economic contribution)",
+        "GRI 203: Indirect Economic Impacts 2016 (GRI 203-1 Infrastructure & services)",
+        "SASB Community Relations topic \u2014 local economic development metrics",
+        "ISO 26000:2010 \u2014 \u00a76.8 Community Involvement and Development",
+        "UN SDG 8 (Decent Work and Economic Growth) \u2014 local job creation"
       ]
     },
     {
@@ -614,6 +694,13 @@
         "Non-performing loan ratio (%)",
         "Leverage ratio",
         "Climate & nature-related financial risk stress test results"
+      ],
+      "sources": [
+        "Basel III Framework (BIS 2017) \u2014 systemic risk capital requirements",
+        "Bank of England Financial Stability Reports \u2014 systemic institution monitoring",
+        "ESRS G1 Business Conduct \u2014 systemic risk governance",
+        "UK Financial Services and Markets Act 2000 \u2014 systemic risk provisions",
+        "FSB (Financial Stability Board) \u2014 SIFI designation framework"
       ]
     },
     {
@@ -647,10 +734,17 @@
         "SV-ME": "low"
       },
       "indicators": [
-        "Volume of sustainable/green finance facilitated (£)",
+        "Volume of sustainable/green finance facilitated (\u00a3)",
         "% of investment portfolio aligned with net zero",
-        "Financed emissions (Scope 3, tCO₂e)",
+        "Financed emissions (Scope 3, tCO\u2082e)",
         "ESG product AUM as % of total AUM"
+      ],
+      "sources": [
+        "EU Sustainable Finance Disclosure Regulation (SFDR) 2021 \u2014 Article 8 & 9 products",
+        "EU Taxonomy Regulation 2020 \u2014 substantial contribution to climate mitigation",
+        "ESRS E1 Climate Change \u2014 transition finance exposure metrics",
+        "SASB Environmental Risk Exposure topic (FN-CB-410a, FN-IB-410a)",
+        "NGFS Scenarios for Central Banks and Supervisors 2022"
       ]
     }
   ]

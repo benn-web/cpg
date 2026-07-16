@@ -134,6 +134,10 @@ def render_capital_panel(panel: CapitalPanel, panel_name: str, show_chart: bool 
                 st.markdown("**Key indicators:** " + " · ".join(dep.indicators))
             if dep.tnfd_ecosystem_service:
                 st.caption(f"TNFD ecosystem service: {dep.tnfd_ecosystem_service}")
+            if dep.sources:
+                st.markdown("**Source references:**")
+                for src in dep.sources:
+                    st.markdown(f"- {src}")
             if scored.llm_adjustment_note:
                 st.info(f"⚡ {scored.llm_adjustment_note}")
             st.divider()

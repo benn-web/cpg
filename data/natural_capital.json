@@ -1,6 +1,9 @@
 {
   "version": "2024-01",
-  "frameworks": ["TNFD v1.0", "Natural Capital Protocol (Capital Coalition)"],
+  "frameworks": [
+    "TNFD v1.0",
+    "Natural Capital Protocol (Capital Coalition)"
+  ],
   "dependencies": [
     {
       "id": "NC-001",
@@ -9,7 +12,7 @@
       "subcategory": "Water Quantity",
       "label": "Water Withdrawal & Consumption",
       "description": "Operational or value-chain reliance on freshwater supplies, including direct withdrawal and consumptive use. Critical where operations are located in water-stressed regions or where large volumes are needed in production.",
-      "tnfd_ecosystem_service": "Provisioning – Freshwater",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Freshwater",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Water Management",
@@ -59,10 +62,17 @@
         "TC-SI": "low"
       },
       "indicators": [
-        "Total water withdrawn (m³/year)",
+        "Total water withdrawn (m\u00b3/year)",
         "% withdrawn from water-stressed areas",
         "Water recycling & reuse rate (%)",
-        "Water intensity (m³ per unit of production)"
+        "Water intensity (m\u00b3 per unit of production)"
+      ],
+      "sources": [
+        "SASB Water Management topic (EM-EP-140a, EM-MM-140a, FB-AG-140a)",
+        "TNFD v1.0 \u2014 Annex 4.2: Freshwater (provisioning ecosystem services)",
+        "Natural Capital Protocol Toolkit (Capital Coalition) \u2014 Freshwater module",
+        "GRI 303: Water and Effluents 2018",
+        "IPCC AR6 WGII Ch.4 \u2014 Water: global freshwater scarcity projections"
       ]
     },
     {
@@ -72,7 +82,7 @@
       "subcategory": "Water Quality",
       "label": "Water Quality & Effluent Management",
       "description": "Dependency on clean water for operations and risk of discharging pollutants into water bodies. Includes wastewater treatment and compliance with discharge standards.",
-      "tnfd_ecosystem_service": "Regulating – Water Purification & Waste Treatment",
+      "tnfd_ecosystem_service": "Regulating \u2013 Water Purification & Waste Treatment",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Water Management",
@@ -116,9 +126,16 @@
         "SV-HL": "low"
       },
       "indicators": [
-        "Volume of wastewater discharged (m³)",
+        "Volume of wastewater discharged (m\u00b3)",
         "Number of water-quality permit violations",
         "% of wastewater treated to tertiary standard"
+      ],
+      "sources": [
+        "SASB Water Management topic \u2014 Effluent quality disclosures",
+        "TNFD v1.0 \u2014 Regulating services: Water purification & waste treatment",
+        "GRI 303: Water and Effluents 2018 (GRI 303-4 Water discharge)",
+        "EU Water Framework Directive 2000/60/EC \u2014 Good ecological status targets",
+        "UK Environment Act 2021 \u2014 Statutory water quality targets"
       ]
     },
     {
@@ -128,7 +145,7 @@
       "subcategory": "GHG Emissions",
       "label": "Greenhouse Gas Emissions",
       "description": "Dependency on the atmosphere as a carbon sink. High GHG emitters face transition risk (carbon pricing, regulation) and contribute to physical climate risk for all sectors. Covers Scope 1, 2, and material Scope 3.",
-      "tnfd_ecosystem_service": "Regulating – Climate Regulation",
+      "tnfd_ecosystem_service": "Regulating \u2013 Climate Regulation",
       "tnfd_pillar": "Impacts",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "GHG Emissions",
@@ -192,10 +209,17 @@
         "IF-HB": "medium"
       },
       "indicators": [
-        "Scope 1 GHG emissions (tCO₂e)",
-        "Scope 2 GHG emissions (tCO₂e)",
-        "Material Scope 3 GHG emissions (tCO₂e)",
-        "GHG intensity (tCO₂e per revenue £m)"
+        "Scope 1 GHG emissions (tCO\u2082e)",
+        "Scope 2 GHG emissions (tCO\u2082e)",
+        "Material Scope 3 GHG emissions (tCO\u2082e)",
+        "GHG intensity (tCO\u2082e per revenue \u00a3m)"
+      ],
+      "sources": [
+        "SASB GHG Emissions topic (EM-EP-110a, IF-EU-110a, TR-AU-110a)",
+        "TCFD Recommendations 2017 (updated 2021) \u2014 Transition risk metrics",
+        "GHG Protocol Corporate Accounting and Reporting Standard (WRI/WBCSD 2004)",
+        "IPCC AR6 WGI 2021 \u2014 Physical Science Basis (1.5\u00b0C carbon budgets)",
+        "ESRS E1 Climate Change \u2014 Paragraphs 40\u201362 (GHG inventory requirements)"
       ]
     },
     {
@@ -204,8 +228,8 @@
       "category": "Air",
       "subcategory": "Local Air Pollutants",
       "label": "Air Quality & Local Pollutants",
-      "description": "Release of NOₓ, SOₓ, particulate matter, and volatile organic compounds affecting local air quality. Subject to regulatory limits and community health concerns.",
-      "tnfd_ecosystem_service": "Regulating – Air Quality Regulation",
+      "description": "Release of NO\u2093, SO\u2093, particulate matter, and volatile organic compounds affecting local air quality. Subject to regulatory limits and community health concerns.",
+      "tnfd_ecosystem_service": "Regulating \u2013 Air Quality Regulation",
       "tnfd_pillar": "Impacts",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Air Quality",
@@ -249,10 +273,17 @@
         "SV-ME": "low"
       },
       "indicators": [
-        "NOₓ emissions (metric tonnes)",
-        "SOₓ emissions (metric tonnes)",
+        "NO\u2093 emissions (metric tonnes)",
+        "SO\u2093 emissions (metric tonnes)",
         "Particulate matter emissions (metric tonnes)",
         "Number of air-quality permit violations"
+      ],
+      "sources": [
+        "SASB Air Quality topic (EM-EP-120a, EM-IS-120a, TR-AU-120a)",
+        "ESRS E2 Pollution \u2014 AR 8\u201312 (air pollutant emissions to air)",
+        "GRI 305: Emissions 2016 (GRI 305-6 NOx, SOx, significant air emissions)",
+        "UK Environment Act 2021 \u2014 PM2.5 and NO2 concentration targets",
+        "WHO Global Air Quality Guidelines 2021"
       ]
     },
     {
@@ -262,7 +293,7 @@
       "subcategory": "Land Use & Degradation",
       "label": "Land Use, Degradation & Contamination",
       "description": "Physical footprint of operations, land conversion, soil degradation and contamination. Includes remediation liabilities from historical contamination. Material for extractives, agriculture, and development sectors.",
-      "tnfd_ecosystem_service": "Provisioning – Land; Regulating – Soil Quality",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Land; Regulating \u2013 Soil Quality",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Ecological Impacts",
@@ -310,6 +341,13 @@
         "% land remediated or restored",
         "Contaminated sites under active remediation",
         "Land converted from natural habitat (ha)"
+      ],
+      "sources": [
+        "SASB Ecological Impacts topic (EM-EP-160a, EM-MM-160a)",
+        "TNFD v1.0 \u2014 Pillar 3 (Dependencies): Terrestrial ecosystem services",
+        "ESRS E4 Biodiversity \u2014 Paragraphs 14\u201322 (land-use change, contamination)",
+        "IPBES Land Degradation Assessment 2018 \u2014 Global synthesis",
+        "GRI 304: Biodiversity 2016 (GRI 304-1 Sites in/near protected areas)"
       ]
     },
     {
@@ -319,7 +357,7 @@
       "subcategory": "Soil Health",
       "label": "Soil Health & Fertility",
       "description": "Dependency on fertile, structurally sound soils for agricultural production, landscaping, or as a building substrate. Covers erosion, compaction, nutrient depletion, and soil carbon.",
-      "tnfd_ecosystem_service": "Provisioning – Soil Fertility; Regulating – Erosion Control",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Soil Fertility; Regulating \u2013 Erosion Control",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Ecological Impacts",
@@ -346,6 +384,13 @@
         "% of supply-chain land under sustainable agricultural practice",
         "Soil erosion rate (t/ha/year)",
         "Soil organic matter content (%)"
+      ],
+      "sources": [
+        "FAO Voluntary Guidelines for Sustainable Soil Management 2017",
+        "TNFD v1.0 \u2014 Regulating services: Erosion control & soil fertility",
+        "ESRS E4 Biodiversity \u2014 soil ecosystem integrity indicators",
+        "Natural Capital Protocol Toolkit \u2014 Soils and Land chapter",
+        "EU Soil Health Law (proposed 2023) \u2014 soil monitoring framework"
       ]
     },
     {
@@ -355,7 +400,7 @@
       "subcategory": "Ecosystem Integrity",
       "label": "Biodiversity & Habitat",
       "description": "Reliance on healthy ecosystems for pollination, pest control, coastal protection, and other services underpinning operations or supply chains. Operations in or near sensitive biodiversity areas face regulatory and reputational risk.",
-      "tnfd_ecosystem_service": "Regulating – Pollination, Pest Control, Coastal Protection",
+      "tnfd_ecosystem_service": "Regulating \u2013 Pollination, Pest Control, Coastal Protection",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Biodiversity Impacts",
@@ -400,6 +445,13 @@
         "Area of operations in/adjacent to protected areas (ha)",
         "Biodiversity Management Plans in place for sensitive sites",
         "% of supply chain from biodiversity-sensitive regions"
+      ],
+      "sources": [
+        "TNFD v1.0 \u2014 Pillar 4 (Impacts & Dependencies): Biodiversity loss",
+        "Kunming-Montreal Global Biodiversity Framework 2022 \u2014 Target 15 (corporate disclosure)",
+        "ESRS E4 Biodiversity \u2014 Paragraphs 7\u201313 & Appendix A (material impacts)",
+        "IPBES Global Assessment 2019 \u2014 1 million species threatened",
+        "SASB Biodiversity Impacts topic (EM-MM-160a, RR-FO-160a)"
       ]
     },
     {
@@ -409,7 +461,7 @@
       "subcategory": "Species & Ecosystems",
       "label": "Species & Ecosystem Services Dependency",
       "description": "Value-chain reliance on specific species or ecosystem services (e.g., wild fish stocks, wild pollinators, mangrove coastal protection). Loss of these services creates physical risk to operations.",
-      "tnfd_ecosystem_service": "Provisioning – Wild Fish, Genetic Resources; Cultural – Eco-tourism",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Wild Fish, Genetic Resources; Cultural \u2013 Eco-tourism",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Biodiversity Impacts",
@@ -439,6 +491,13 @@
       "indicators": [
         "Supply-chain species with IUCN Red List status",
         "Wild-caught fish sourced from MSC-certified fisheries (%)"
+      ],
+      "sources": [
+        "TNFD v1.0 \u2014 Annex 4.3: Regulating & cultural ecosystem services",
+        "IPBES Global Assessment 2019 \u2014 Ecosystem function decline",
+        "Natural Capital Protocol Toolkit (Capital Coalition) \u2014 Ecosystem services valuation",
+        "MSC, FSC, RSPO certification standards \u2014 supply chain biodiversity",
+        "ESRS E4 Biodiversity \u2014 species and ecosystem condition metrics"
       ]
     },
     {
@@ -448,7 +507,7 @@
       "subcategory": "Physical Climate Risk",
       "label": "Physical Climate Risk Exposure",
       "description": "Exposure of assets, supply chains, and operations to chronic (temperature, sea-level rise) and acute (flooding, extreme heat, storms) physical climate hazards. Relevant across all sectors; highest where physical assets are long-lived or located in hazard zones.",
-      "tnfd_ecosystem_service": "Regulating – Climate Regulation, Flood Control",
+      "tnfd_ecosystem_service": "Regulating \u2013 Climate Regulation, Flood Control",
       "tnfd_pillar": "Risks & Opportunities",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Physical Impacts of Climate Change",
@@ -497,8 +556,15 @@
       },
       "indicators": [
         "% of assets in high physical-risk locations",
-        "Financial exposure to physical climate hazards (£)",
+        "Financial exposure to physical climate hazards (\u00a3)",
         "Climate scenario analysis conducted (Y/N)"
+      ],
+      "sources": [
+        "TCFD Recommendations 2017 \u2014 Physical risk: chronic and acute hazards",
+        "IPCC AR6 WGII 2022 \u2014 Ch.16: Key risks across sectors and regions",
+        "ESRS E1 Climate Change \u2014 Paragraphs 63\u201379 (physical risk exposure)",
+        "Bank of England CBES 2021 \u2014 Climate Biennial Exploratory Scenario",
+        "NGFS (Network for Greening the Financial System) \u2014 Physical risk scenarios"
       ]
     },
     {
@@ -508,7 +574,7 @@
       "subcategory": "Non-renewable Raw Materials",
       "label": "Non-renewable Resource Extraction & Depletion",
       "description": "Dependency on finite mineral, fossil-fuel, and aggregates resources. Includes supply security, price volatility, and depletion risk as ore grades decline.",
-      "tnfd_ecosystem_service": "Provisioning – Minerals, Fossil Fuels",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Minerals, Fossil Fuels",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Reserve Quantity & Quality",
@@ -545,6 +611,13 @@
         "Reserve replacement ratio (%)",
         "Years of resource reserves at current production",
         "Critical material supply-chain concentration risk"
+      ],
+      "sources": [
+        "SASB Reserve Quantity & Quality topic (EM-EP-420a)",
+        "ESRS E5 Resource Use and Circular Economy \u2014 mineral & fossil fuel extraction",
+        "IEA World Energy Outlook 2023 \u2014 Resource depletion trajectories",
+        "Natural Capital Protocol Toolkit \u2014 Mineral & fossil resource module",
+        "IASB IFRS 6 \u2014 Exploration for and Evaluation of Mineral Resources"
       ]
     },
     {
@@ -554,7 +627,7 @@
       "subcategory": "Renewable Raw Materials",
       "label": "Renewable & Bio-based Raw Materials",
       "description": "Dependency on sustainably sourced biological materials including timber, fibres, agricultural commodities, and marine resources. Overexploitation undermines long-term supply.",
-      "tnfd_ecosystem_service": "Provisioning – Timber, Fibres, Agricultural Crops",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Timber, Fibres, Agricultural Crops",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Supply Chain Management",
@@ -589,8 +662,15 @@
       },
       "indicators": [
         "% of key commodities certified sustainable (FSC, RSPO, MSC, etc.)",
-        "Deforestation-linked commodity exposure (£ spend)",
+        "Deforestation-linked commodity exposure (\u00a3 spend)",
         "% of bio-based inputs traceable to source"
+      ],
+      "sources": [
+        "SASB Supply Chain Management topic (RR-FO, FB-AG, CG-HP)",
+        "ESRS E5 Resource Use \u2014 Paragraphs 11\u201318 (biotic resource flows)",
+        "FSC Principles & Criteria for Forest Stewardship (FSC-STD-01-001)",
+        "RSPO Principles and Criteria 2018 \u2014 Sustainable palm oil",
+        "EU Regulation on Deforestation-free Products 2023 (EUDR)"
       ]
     },
     {
@@ -600,7 +680,7 @@
       "subcategory": "Critical & Conflict Minerals",
       "label": "Critical Minerals & Conflict-Sensitive Resources",
       "description": "Dependency on critical minerals (lithium, cobalt, rare earths) and resources extracted in conflict-affected or high-risk areas. Includes supply security, geopolitical risk, and human rights exposure.",
-      "tnfd_ecosystem_service": "Provisioning – Minerals",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Minerals",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Critical Materials Sourcing",
@@ -633,6 +713,13 @@
         "% of critical minerals sourced from OECD Due Diligence compliant suppliers",
         "Number of 3TG smelters in supply chain audited",
         "% spend on critical minerals traceable"
+      ],
+      "sources": [
+        "OECD Due Diligence Guidance for Responsible Mineral Supply Chains 2016",
+        "EU Critical Raw Materials Act 2023 \u2014 strategic and critical minerals list",
+        "ESRS E5 Resource Use \u2014 critical material sourcing disclosures",
+        "SEC Conflict Minerals Rule (Dodd-Frank \u00a71502) \u2014 3TG minerals",
+        "IFC Performance Standard 1 \u2014 supply chain risk assessment"
       ]
     },
     {
@@ -642,7 +729,7 @@
       "subcategory": "Hazardous Waste",
       "label": "Waste & Hazardous Materials Management",
       "description": "Generation of hazardous and non-hazardous waste requiring safe disposal or treatment. Includes tailings, chemical waste, and electronic waste. Regulatory and liability exposure where waste is mismanaged.",
-      "tnfd_ecosystem_service": "Regulating – Waste Decomposition",
+      "tnfd_ecosystem_service": "Regulating \u2013 Waste Decomposition",
       "tnfd_pillar": "Impacts",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Waste & Hazardous Materials Management",
@@ -690,6 +777,13 @@
         "% hazardous waste recycled or recovered",
         "Number of significant spills",
         "Total non-hazardous waste sent to landfill"
+      ],
+      "sources": [
+        "SASB Waste & Hazardous Materials Management topic (EM-MM-150a, RT-CH-150a)",
+        "ESRS E2 Pollution \u2014 Paragraphs 13\u201321 (substances of concern, waste)",
+        "GRI 306: Waste 2020 (GRI 306-3 Waste generated, 306-4 Waste diverted)",
+        "EU Waste Framework Directive 2008/98/EC \u2014 waste hierarchy",
+        "UK Environmental Permitting Regulations 2016"
       ]
     },
     {
@@ -699,7 +793,7 @@
       "subcategory": "Energy Consumption",
       "label": "Energy Consumption & Mix",
       "description": "Dependency on energy (particularly fossil-fuel-derived) for operations. High energy intensity creates cost exposure, transition risk, and GHG emissions. Energy mix (% renewable) drives decarbonisation trajectory.",
-      "tnfd_ecosystem_service": "Provisioning – Energy (via fossil fuels/renewables)",
+      "tnfd_ecosystem_service": "Provisioning \u2013 Energy (via fossil fuels/renewables)",
       "tnfd_pillar": "Dependencies",
       "capital_protocol_category": "Natural Capital",
       "sasb_disclosure_topic": "Energy Management",
@@ -745,7 +839,14 @@
       "indicators": [
         "Total energy consumption (GJ)",
         "% energy from renewable sources",
-        "Energy intensity (GJ per unit of production or £m revenue)"
+        "Energy intensity (GJ per unit of production or \u00a3m revenue)"
+      ],
+      "sources": [
+        "SASB Energy Management topic (EM-EP-130a, IF-EU-130a, RT-CH-130a)",
+        "ESRS E1 Climate Change \u2014 Paragraphs 43\u201345 (energy consumption & mix)",
+        "GRI 302: Energy 2016 (GRI 302-1 Energy consumption within the organisation)",
+        "IEA Energy Efficiency 2023 \u2014 sector-level intensity benchmarks",
+        "UK Streamlined Energy and Carbon Reporting (SECR) \u2014 mandatory from 2019"
       ]
     }
   ]
