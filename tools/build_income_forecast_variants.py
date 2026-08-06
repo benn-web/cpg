@@ -114,7 +114,9 @@ def build(mode):
         ("Blue text on pale-yellow fill = cells you fill in.   Black = calculated, do not edit.   Green = pulled from "
          "another tab.   Red / amber fills = under / over variance and outstanding-reforecast flags.", "p"),
         ("Notes", "h"),
-        (("· Forecast and all amounts are GBP.   " if amount else
+        (("· Forecast and all amounts are GBP.   · The Dashboard's Unallocated Fee (£) column = total fee minus the "
+          "forecast you've entered: amber = fee still to spread, red = over-forecast, blank = fully forecast.   "
+          if amount else
           "· % complete is stored as a fraction (enter 25% or 0.25, not 25).   · All amounts are GBP.   ") +
          "· Dates are the first of the month (shown as Sep-2026).   "
          "· Demo engagements M-1001/1002/1003 are examples — delete them once you add your own.", "p"),
@@ -368,6 +370,8 @@ def build(mode):
     ecol = 6; e_hdr_row = m_hdr
     eheaders = ["Matter Code", "Client", "Engagement Manager", "Total Fee (£)", "Forecast to Date (£)",
                 "Actual to Date (£)", "Remaining Fee (£)", "% Recognised", "Open Var (#)"]
+    if amount:  # amounts are typed directly, so a fee may be under/over/fully allocated
+        eheaders.append("Unallocated Fee (£)")
     hdr(ws, e_hdr_row, eheaders, start=ecol)
     e_first = e_hdr_row + 1; E_ROWS = 20
     for i in range(E_ROWS):
@@ -375,7 +379,7 @@ def build(mode):
         gc = lambda off: get_column_letter(ecol+off)
         ws.cell(row=rr, column=ecol, value=f"=IF('Matters Register'!$A{regrow}=\"\",\"\",'Matters Register'!$A{regrow})").font = F_LINK
         ws.cell(row=rr, column=ecol).alignment = CENTER; ws.cell(row=rr, column=ecol).border = BORDER
-        for off, formula, fmt in [
+        specs = [
             (1, f"=IF({code}=\"\",\"\",XLOOKUP({code},{REG_MATTER},'Matters Register'!$B${REG_FIRST}:$B${REG_FIRST+REG_CAP-1},\"\"))", None),
             (2, f"=IF({code}=\"\",\"\",XLOOKUP({code},{REG_MATTER},{REG_EM},\"\"))", None),
             (3, f"=IF({code}=\"\",\"\",XLOOKUP({code},{REG_MATTER},{REG_FEE},\"\"))", GBP),
@@ -384,7 +388,10 @@ def build(mode):
             (6, f"=IF({code}=\"\",\"\",{gc(3)}{rr}-{gc(5)}{rr})", GBP),
             (7, f"=IF(OR({code}=\"\",{gc(3)}{rr}=0),\"\",{gc(5)}{rr}/{gc(3)}{rr})", PCT),
             (8, f"=IF({code}=\"\",\"\",COUNTIFS({LOG_A},{code},{LOG_P},\"YES\"))", None),
-        ]:
+        ]
+        if amount:  # Unallocated = total fee - total forecast entered
+            specs.append((9, f"=IF({code}=\"\",\"\",{gc(3)}{rr}-{gc(4)}{rr})", GBP))
+        for off, formula, fmt in specs:
             cell = ws.cell(row=rr, column=ecol+off, value=formula)
             cell.font = F_BODY if off >= 4 else F_LINK; cell.border = BORDER
             if fmt: cell.number_format = fmt
@@ -392,6 +399,10 @@ def build(mode):
     e_last = e_first + E_ROWS - 1
     ws.conditional_formatting.add(f"{get_column_letter(ecol+8)}{e_first}:{get_column_letter(ecol+8)}{e_last}",
         CellIsRule(operator="greaterThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
+    if amount:  # over-forecast (<0) red; fee still to spread (>0) amber; fully forecast (0) no fill
+        ua = f"{get_column_letter(ecol+9)}{e_first}:{get_column_letter(ecol+9)}{e_last}"
+        ws.conditional_formatting.add(ua, CellIsRule(operator="lessThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
+        ws.conditional_formatting.add(ua, CellIsRule(operator="greaterThan", formula=["0"], fill=FILL_AMBER, font=FONT_AMBER))
     EM_EMCOL = f"${get_column_letter(ecol+2)}${e_first}:${get_column_letter(ecol+2)}${e_last}"
     EM_FC    = f"${get_column_letter(ecol+4)}${e_first}:${get_column_letter(ecol+4)}${e_last}"
     EM_AC    = f"${get_column_letter(ecol+5)}${e_first}:${get_column_letter(ecol+5)}${e_last}"
@@ -413,7 +424,7 @@ def build(mode):
 
     for col, w in zip("ABCD", [20,22,16,14]): ws.column_dimensions[col].width = w
     ws.column_dimensions["E"].width = 3
-    for col, w in zip(["F","G","H","I","J","K","L","M","N"], [12,20,18,11,16,16,16,12,12]):
+    for col, w in zip(["F","G","H","I","J","K","L","M","N","O"], [12,20,18,11,16,16,16,12,12,16]):
         ws.column_dimensions[col].width = w
     ws.row_dimensions[m_hdr].height = 30
 
