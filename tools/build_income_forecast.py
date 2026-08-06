@@ -12,7 +12,7 @@ import datetime as dt
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side, NamedStyle
 from openpyxl.worksheet.datavalidation import DataValidation
-from openpyxl.formatting.rule import CellIsRule
+from openpyxl.formatting.rule import CellIsRule, FormulaRule
 from openpyxl.worksheet.table import Table, TableStyleInfo
 from openpyxl.chart import BarChart, Reference
 from openpyxl.utils import get_column_letter
@@ -89,6 +89,14 @@ lines = [
      "actual came in OVER forecast (over-variance).", "p"),
     ("d.  Re-allocate next month: use the Cumulative Actual and Remaining Fee columns to re-base your % complete so the "
      "remaining fee is spread across the remaining months. The workbook flags the variance; the EM decides how to re-spread it.", "p"),
+    ("e.  Record the reforecast on the FLAGGED month's row: set Variance Status (Reforecast = you re-based it next month; "
+     "Accepted = variance accepted, no reforecast needed), plus Reforecast By and Reforecast Date. This is the audit trail.", "p"),
+    ("Tracking reforecasts", "h"),
+    ("The Forecast Log's right-hand columns show whether each flagged variance has been actioned. Reforecast Entered? "
+     "auto-detects whether a later month's row exists for that engagement. Outstanding? shows YES (red) for any variance "
+     "not yet signed off, and Action Note tells you what's needed ('Awaiting reforecast', 'Reforecast entered — confirm "
+     "sign-off', or 'Signed off'). Use the header AutoFilter to filter Outstanding? = YES, or filter by Engagement Manager. "
+     "The Dashboard's Open Variances panel counts outstanding items overall, per engagement and per EM.", "p"),
     ("Colour key", "h"),
     ("Blue text on pale-yellow fill = cells you fill in.   Black text = calculated, do not edit.   "
      "Green text = pulled from another tab.   Red / amber fills = under / over variance flags.", "p"),
@@ -223,7 +231,9 @@ ws["A2"].font = F_SUB
 log_headers = ["Matter Code", "Month", "Total Fee (£)", "Cum % Complete",
                "Forecast Cum Revenue (£)", "Forecast Recognised This Month (£)",
                "Actual NFI This Month (£)", "Variance (£)",
-               "Cumulative Actual to Date (£)", "Remaining Fee (£)"]
+               "Cumulative Actual to Date (£)", "Remaining Fee (£)",
+               "Engagement Manager", "Variance Status", "Reforecast By",
+               "Reforecast Date", "Reforecast Entered?", "Outstanding?", "Action Note"]
 hdr(ws, HDR_ROW, log_headers)
 LOG_FIRST = HDR_ROW + 1
 LOG_N = 60
@@ -241,6 +251,13 @@ log_rows = [
 E_col_range = f"$E${LOG_FIRST}:$E${LLAST}"
 A_col_range = f"$A${LOG_FIRST}:$A${LLAST}"
 B_col_range = f"$B${LOG_FIRST}:$B${LLAST}"
+
+# Demo reforecast sign-offs, keyed by (matter, month): (status, by, date).
+# M-1003 Oct variance (-£1k) is signed off as reforecast the following month;
+# M-1001 Oct/Nov variances are left Open to demonstrate the outstanding flags.
+demo_status = {
+    ("M-1003", dt.date(2026,10,1)): ("Reforecast", "PS", dt.date(2026,11,4)),
+}
 
 for i in range(LOG_N):
     rr = LOG_FIRST + i
@@ -283,8 +300,38 @@ for i in range(LOG_N):
     # J Remaining fee = total fee - cumulative actual
     jj = ws.cell(row=rr, column=10, value=f'=IF($A{rr}="","",$C{rr}-$I{rr})')
     jj.font = F_BODY; jj.number_format = GBP; jj.border = BORDER; jj.fill = FILL_CALC
+    # --- reforecast tracking ---
+    dstat = demo_status.get((demo[0], demo[1])) if demo else None
+    # K Engagement Manager (link to register) — enables per-EM filtering/counts
+    k = ws.cell(row=rr, column=11,
+        value=f'=IF($A{rr}="","",IFERROR(INDEX({REG_EM},MATCH($A{rr},{REG_MATTER},0)),""))')
+    k.font = F_LINK; k.border = BORDER
+    # L Variance Status (EM input dropdown)
+    l = ws.cell(row=rr, column=12, value=(dstat[0] if dstat else None))
+    l.font = F_INPUT; l.fill = FILL_INPUT; l.alignment = CENTER; l.border = BORDER
+    # M Reforecast By (EM input)
+    m = ws.cell(row=rr, column=13, value=(dstat[1] if dstat else None))
+    m.font = F_INPUT; m.fill = FILL_INPUT; m.alignment = CENTER; m.border = BORDER
+    # N Reforecast Date (EM input)
+    n = ws.cell(row=rr, column=14, value=(dstat[2] if dstat else None))
+    n.font = F_INPUT; n.fill = FILL_INPUT; n.number_format = 'DD-MMM-YYYY'; n.alignment = CENTER; n.border = BORDER
+    # O Reforecast Entered? (auto) — does a later-month row exist for this matter?
+    o = ws.cell(row=rr, column=15,
+        value=(f'=IF(OR($H{rr}="",$H{rr}=0),"",'
+               f'IF(COUNTIFS({A_col_range},$A{rr},{B_col_range},">"&$B{rr})>0,"Yes","No"))'))
+    o.font = F_BODY; o.alignment = CENTER; o.border = BORDER; o.fill = FILL_CALC
+    # P Outstanding? (auto) — variance flagged and not signed off
+    p = ws.cell(row=rr, column=16,
+        value=(f'=IF(AND($H{rr}<>"",$H{rr}<>0,NOT(OR($L{rr}="Reforecast",$L{rr}="Accepted"))),"YES","")'))
+    p.font = F_BOLD; p.alignment = CENTER; p.border = BORDER; p.fill = FILL_CALC
+    # Q Action Note (auto) — human-readable prompt
+    q = ws.cell(row=rr, column=17,
+        value=(f'=IF(OR($H{rr}="",$H{rr}=0),"",'
+               f'IF(OR($L{rr}="Reforecast",$L{rr}="Accepted"),"Signed off: "&$L{rr},'
+               f'IF($O{rr}="Yes","Reforecast entered — confirm sign-off","Awaiting reforecast")))'))
+    q.font = F_BODY; q.border = BORDER; q.fill = FILL_CALC
 
-log_widths = [12, 11, 13, 13, 16, 18, 16, 12, 16, 14]
+log_widths = [12, 11, 13, 13, 16, 18, 16, 12, 16, 14, 18, 13, 12, 14, 15, 12, 32]
 for i, w in enumerate(log_widths):
     ws.column_dimensions[get_column_letter(1+i)].width = w
 ws.row_dimensions[HDR_ROW].height = 42
@@ -297,6 +344,8 @@ dv_pctl = DataValidation(type="decimal", operator="between", formula1="0", formu
                          error="Enter cumulative % complete as a fraction between 0 and 1 (e.g. 0.25 for 25%).",
                          errorTitle="% complete")
 ws.add_data_validation(dv_pctl); dv_pctl.add(f"D{LOG_FIRST}:D{LLAST}")
+dv_stat = DataValidation(type="list", formula1='"Open,Reforecast,Accepted"', allow_blank=True)
+ws.add_data_validation(dv_stat); dv_stat.add(f"L{LOG_FIRST}:L{LLAST}")
 # conditional formatting on variance (H) and remaining fee (J)
 ws.conditional_formatting.add(f"H{LOG_FIRST}:H{LLAST}",
     CellIsRule(operator="lessThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
@@ -304,11 +353,22 @@ ws.conditional_formatting.add(f"H{LOG_FIRST}:H{LLAST}",
     CellIsRule(operator="greaterThan", formula=["0"], fill=FILL_AMBER, font=FONT_AMBER))
 ws.conditional_formatting.add(f"J{LOG_FIRST}:J{LLAST}",
     CellIsRule(operator="lessThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
-ws.freeze_panes = f"A{LOG_FIRST}"
+# Outstanding? = "YES" -> red; Action Note pending -> amber
+ws.conditional_formatting.add(f"P{LOG_FIRST}:P{LLAST}",
+    CellIsRule(operator="equal", formula=['"YES"'], fill=FILL_RED, font=FONT_RED))
+ws.conditional_formatting.add(f"Q{LOG_FIRST}:Q{LLAST}",
+    FormulaRule(formula=[f'AND($Q{LOG_FIRST}<>"",LEFT($Q{LOG_FIRST},6)<>"Signed")'],
+                fill=FILL_AMBER, font=FONT_AMBER))
+# AutoFilter so reviewers can filter Outstanding?=YES or by Engagement Manager
+ws.auto_filter.ref = f"A{HDR_ROW}:Q{LLAST}"
+ws.freeze_panes = f"C{LOG_FIRST}"
 
 LOG_F = f"'Forecast Log'!$F${LOG_FIRST}:$F${LLAST}"
 LOG_A = f"'Forecast Log'!$A${LOG_FIRST}:$A${LLAST}"
 LOG_B = f"'Forecast Log'!$B${LOG_FIRST}:$B${LLAST}"
+LOG_H = f"'Forecast Log'!$H${LOG_FIRST}:$H${LLAST}"
+LOG_K = f"'Forecast Log'!$K${LOG_FIRST}:$K${LLAST}"
+LOG_P = f"'Forecast Log'!$P${LOG_FIRST}:$P${LLAST}"
 
 # ============================================================ DASHBOARD
 ws = wb.create_sheet("Dashboard")
@@ -351,7 +411,8 @@ ws.conditional_formatting.add(f"D{m_first}:D{m_last}",
 e_hdr_row = m_hdr_row
 ecol = 6  # start column F
 eheaders = ["Matter Code", "Client", "Engagement Manager", "Total Fee (£)",
-            "Forecast to Date (£)", "Actual to Date (£)", "Remaining Fee (£)", "% Recognised"]
+            "Forecast to Date (£)", "Actual to Date (£)", "Remaining Fee (£)", "% Recognised",
+            "Open Var (#)"]
 hdr(ws, e_hdr_row, eheaders, start=ecol)
 e_first = e_hdr_row + 1
 E_ROWS = 20
@@ -376,7 +437,12 @@ for i in range(E_ROWS):
     pct = ws.cell(row=rr, column=ecol+7,
         value=f"=IF(OR({code}=\"\",{get_column_letter(ecol+3)}{rr}=0),\"\",{get_column_letter(ecol+5)}{rr}/{get_column_letter(ecol+3)}{rr})")
     pct.font = F_BODY; pct.number_format = PCT; pct.alignment = CENTER; pct.border = BORDER
+    ov = ws.cell(row=rr, column=ecol+8, value=f"=IF({code}=\"\",\"\",COUNTIFS({LOG_A},{code},{LOG_P},\"YES\"))")
+    ov.font = F_BODY; ov.alignment = CENTER; ov.border = BORDER
 e_last = e_first + E_ROWS - 1
+# red-flag any engagement with open variances
+ws.conditional_formatting.add(f"{get_column_letter(ecol+8)}{e_first}:{get_column_letter(ecol+8)}{e_last}",
+    CellIsRule(operator="greaterThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
 EM_CODE  = f"$F${e_first}:$F${e_last}"
 EM_EMCOL = f"${get_column_letter(ecol+2)}${e_first}:${get_column_letter(ecol+2)}${e_last}"
 EM_FC    = f"${get_column_letter(ecol+4)}${e_first}:${get_column_letter(ecol+4)}${e_last}"
@@ -385,7 +451,7 @@ EM_AC    = f"${get_column_letter(ecol+5)}${e_first}:${get_column_letter(ecol+5)}
 # --- by EM table (list of EMs maintained here) ---
 emhdr_row = e_last + 3
 ws.cell(row=emhdr_row-1, column=ecol, value="By Engagement Manager (add/remove EM names as needed)").font = F_SUB
-hdr(ws, emhdr_row, ["Engagement Manager", "Forecast to Date (£)", "Actual to Date (£)"], start=ecol)
+hdr(ws, emhdr_row, ["Engagement Manager", "Forecast to Date (£)", "Actual to Date (£)", "Open (#)"], start=ecol)
 em_names = ["Priya Shah", "James Okoro"]
 emf = emhdr_row + 1
 for i, name in enumerate(em_names):
@@ -395,14 +461,39 @@ for i, name in enumerate(em_names):
     fc.font = F_BODY; fc.number_format = GBP; fc.border = BORDER
     ac = ws.cell(row=rr, column=ecol+2, value=f"=SUMIF({EM_EMCOL},${get_column_letter(ecol)}{rr},{EM_AC})")
     ac.font = F_BODY; ac.number_format = GBP; ac.border = BORDER
+    ov = ws.cell(row=rr, column=ecol+3, value=f"=COUNTIFS({LOG_K},${get_column_letter(ecol)}{rr},{LOG_P},\"YES\")")
+    ov.font = F_BODY; ov.alignment = CENTER; ov.border = BORDER
+emlast = emf + len(em_names) - 1
+ws.conditional_formatting.add(f"{get_column_letter(ecol+3)}{emf}:{get_column_letter(ecol+3)}{emlast}",
+    CellIsRule(operator="greaterThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
 
 # widths
-for col, w in zip("ABCD", [12, 22, 16, 14]):
+for col, w in zip("ABCD", [20, 22, 16, 14]):
     ws.column_dimensions[col].width = w
 ws.column_dimensions["E"].width = 3
-for col, w in zip(["F","G","H","I","J","K","L","M"], [12, 20, 20, 14, 16, 16, 16, 12]):
+for col, w in zip(["F","G","H","I","J","K","L","M","N"], [12, 20, 18, 11, 16, 16, 16, 12, 12]):
     ws.column_dimensions[col].width = w
 ws.row_dimensions[m_hdr_row].height = 30
+
+# --- Open Variances tracker (headline exceptions panel) ---
+ov_row = tr + 2
+ws.cell(row=ov_row, column=1, value="Open Variances — flagged but not yet reforecast").font = \
+    Font(name=ARIAL, size=11, bold=True, color="1F3864")
+panel = [
+    ("Open items (#)", f'=COUNTIF({LOG_P},"YES")', "int"),
+    ("Open value (£, net)", f'=SUMIFS({LOG_H},{LOG_P},"YES")', "gbp"),
+    ("Oldest open month", f'=IF(COUNTIF({LOG_P},"YES")=0,"",_xlfn.MINIFS({LOG_B},{LOG_P},"YES"))', "date"),
+]
+for j, (label, formula, kind) in enumerate(panel):
+    r = ov_row + 1 + j
+    lc = ws.cell(row=r, column=1, value=label); lc.font = F_BODY; lc.border = BORDER
+    vc = ws.cell(row=r, column=2, value=formula); vc.font = F_BOLD; vc.border = BORDER
+    vc.alignment = CENTER
+    if kind == "gbp": vc.number_format = GBP
+    elif kind == "date": vc.number_format = DATEF
+# red highlight when there are open items
+ws.conditional_formatting.add(f"B{ov_row+1}",
+    CellIsRule(operator="greaterThan", formula=["0"], fill=FILL_RED, font=FONT_RED))
 
 # --- chart ---
 chart = BarChart(); chart.type = "col"; chart.style = 10
@@ -412,7 +503,7 @@ data = Reference(ws, min_col=2, max_col=3, min_row=m_hdr_row, max_row=m_last)
 cats = Reference(ws, min_col=1, min_row=m_first, max_row=m_last)
 chart.add_data(data, titles_from_data=True); chart.set_categories(cats)
 chart.height = 8; chart.width = 20
-ws.add_chart(chart, f"A{tr+3}")
+ws.add_chart(chart, f"A{ov_row+5}")
 
 # order sheets: Instructions, Register, Log, Provisions, Dashboard
 wb.move_sheet("Month-End Provisions", offset=1)  # keep after Log? ensure order below
