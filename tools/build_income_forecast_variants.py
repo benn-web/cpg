@@ -114,8 +114,10 @@ def build(mode):
         ("Blue text on pale-yellow fill = cells you fill in.   Black = calculated, do not edit.   Green = pulled from "
          "another tab.   Red / amber fills = under / over variance and outstanding-reforecast flags.", "p"),
         ("Notes", "h"),
-        (("· Forecast and all amounts are GBP.   · The Dashboard's Unallocated Fee (£) column = total fee minus the "
-          "forecast you've entered: amber = fee still to spread, red = over-forecast, blank = fully forecast.   "
+        (("· Forecast and all amounts are GBP.   · The Dashboard's Unallocated Fee (£) = fee not yet covered by actuals "
+          "or by forecast on months still open. Months that already have an actual are counted at their actual, so the "
+          "original forecast row stays untouched and re-spreading a variance across future months reconciles back to "
+          "zero: amber = fee still to spread, red = over-forecast, blank = fully forecast.   "
           if amount else
           "· % complete is stored as a fraction (enter 25% or 0.25, not 25).   · All amounts are GBP.   ") +
          "· Dates are the first of the month (shown as Sep-2026).   "
@@ -336,6 +338,8 @@ def build(mode):
     FCOL_RNG = f"'Forecast Log'!${FCOL}${LOG_FIRST}:${FCOL}${LLAST}"
     LOG_A = f"'Forecast Log'!$A${LOG_FIRST}:$A${LLAST}"
     LOG_B = f"'Forecast Log'!$B${LOG_FIRST}:$B${LLAST}"
+    LOG_D = f"'Forecast Log'!$D${LOG_FIRST}:$D${LLAST}"
+    LOG_G = f"'Forecast Log'!$G${LOG_FIRST}:$G${LLAST}"
     LOG_H = f"'Forecast Log'!$H${LOG_FIRST}:$H${LLAST}"
     LOG_K = f"'Forecast Log'!$K${LOG_FIRST}:$K${LLAST}"
     LOG_P = f"'Forecast Log'!$P${LOG_FIRST}:$P${LLAST}"
@@ -389,8 +393,13 @@ def build(mode):
             (7, f"=IF(OR({code}=\"\",{gc(3)}{rr}=0),\"\",{gc(5)}{rr}/{gc(3)}{rr})", PCT),
             (8, f"=IF({code}=\"\",\"\",COUNTIFS({LOG_A},{code},{LOG_P},\"YES\"))", None),
         ]
-        if amount:  # Unallocated = total fee - total forecast entered
-            specs.append((9, f"=IF({code}=\"\",\"\",{gc(3)}{rr}-{gc(4)}{rr})", GBP))
+        if amount:
+            # Unallocated = fee not covered by actuals or by forecast on still-open months.
+            # Closed months (those with an actual) are represented by their actual via Remaining
+            # Fee (gc(6) = Total Fee - Actual to Date); open months (blank Actual, G="") add their
+            # forecast. So the superseded forecast on an actualised month is never double-counted,
+            # and re-spreading a variance across future months reconciles back to zero.
+            specs.append((9, f"=IF({code}=\"\",\"\",{gc(6)}{rr}-SUMPRODUCT(({LOG_A}={code})*({LOG_G}=\"\")*{LOG_D}))", GBP))
         for off, formula, fmt in specs:
             cell = ws.cell(row=rr, column=ecol+off, value=formula)
             cell.font = F_BODY if off >= 4 else F_LINK; cell.border = BORDER
